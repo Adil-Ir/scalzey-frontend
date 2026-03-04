@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+body {
+  font-family: "Sora", sans-serif;
+}
+
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.react-tel-input .form-control {
+  @apply !w-full !bg-transparent !border-none !outline-none !shadow-none !text-sm !text-slate-50;
+}
+
+.react-tel-input .flag-dropdown {
+  @apply !bg-transparent !border-none !outline-none;
+}
+
+.react-tel-input .selected-flag {
+  @apply !bg-transparent !border-none !outline-none !px-0;
+}
+
+.react-tel-input .country-list {
+  @apply !bg-slate-900 !text-slate-50;
+}
