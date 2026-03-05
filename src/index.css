@@ -10,6 +10,10 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+.font-sora {
+  font-family: "Sora", sans-serif;
+}
+
 .react-tel-input .form-control {
   @apply !w-full !bg-transparent !border-none !outline-none !shadow-none !text-sm !text-slate-50;
 }

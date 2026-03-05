@@ -1,16 +1,26 @@
+import { IoIosArrowBack } from "react-icons/io";
 import { NewPasswordForm } from "./components/NewPasswordForm";
+import { Link } from "react-router-dom";
 
 export const NewPasswordPage = () => {
   return (
-    <div className="space-y-6">
-      <div className="space-y-1">
-        <h2 className="text-xl font-semibold tracking-tight">
-          Set new password
-        </h2>
-        <p className="text-sm text-slate-300">
-          Choose a strong password to secure your account.
-        </p>
+    <div className=" w-full rounded-[26.53px] bg-[#1D242A] px-17.5 pt-12.25 pb-24.5">
+       <div className="mb-22.75 flex items-center justify-between">
+        <Link
+          to="/forgot-password"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#20303B]  text-white text-lg "
+        >
+          <IoIosArrowBack />
+        </Link>
       </div>
+        <div className="space-y-1.5 mb-12">
+          <h2 className="font-poppins text-[28.23px] font-medium leading-none text-white">
+            Create New Password
+          </h2>
+          <p className="text-sm text-[#FFFFFFBF]">
+            Use 8 or more characters with a mix of letters, numbers & symbols
+          </p>
+        </div>
       <NewPasswordForm />
     </div>
   );

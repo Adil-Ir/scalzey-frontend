@@ -48,6 +48,9 @@ export const OtpForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-3">
+        <label className="font-poppins text-[13.259px] font-normal leading-none text-white">
+          Enter OTP
+        </label>
         <OTPInput
           value={otp}
           onChange={handleChange}
