@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { NavLink } from "react-router-dom";
 const TabPills = () => {
   return (
@@ -21,7 +21,7 @@ const TabPills = () => {
             className={({ isActive }) =>
               `flex-1 py-3 text-center transition ${
                 isActive
-                  ? "bg-[#20303B] text-white"
+                  ? "bg-[#3DB5FF] text-white"
                   : "text-slate-200"
               }`
             }
