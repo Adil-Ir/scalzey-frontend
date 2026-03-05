@@ -1,49 +1,78 @@
-import type { FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+type ForgotPasswordFormValues = {
+  email: string;
+};
+
+const schema: yup.ObjectSchema<ForgotPasswordFormValues> = yup.object({
+  email: yup
+    .string()
+    .email("Enter a valid email address")
+    .required("Email is required"),
+});
 
 export const ForgotPasswordForm = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForgotPasswordFormValues>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const onSubmit = (_data: ForgotPasswordFormValues) => {
     // TODO: trigger real forgot-password flow (send OTP)
     navigate("/otp");
   };
 
+  const baseFieldClasses =
+    "rounded-full bg-transparent px-4 py-2.5 text-sm text-slate-50 transition-colors";
+
+  const getBorderClass = (hasError: boolean) =>
+    hasError
+      ? "border border-red-500"
+      : "border border-[#2D3D46] hover:border-[#44BCFF] focus-within:border-[#44BCFF]";
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="space-y-1.5">
-        <label className="text-sm font-medium text-slate-100" htmlFor="email">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <div className=" mb-10">
+        <label
+          className="font-poppins text-[13.259px] font-normal leading-none text-white"
+          htmlFor="email"
+        >
           Email address
         </label>
-        <div className="rounded-full border border-[#2D3D46] bg-transparent px-4 py-2.5 text-sm text-slate-50 transition-colors hover:border-sky-500 focus-within:border-sky-500">
+        <div
+          className={`${baseFieldClasses} ${getBorderClass(!!errors.email)} mt-2 `}
+        >
           <input
             id="email"
             type="email"
-            required
             className="w-full bg-transparent text-sm text-slate-50 placeholder-slate-400 outline-none border-none"
             placeholder="Enter your email"
+            {...register("email")}
           />
         </div>
+        {errors.email && (
+          <p className="mt-2 text-[11px] text-red-500">
+            {errors.email.message}
+          </p>
+        )}
       </div>
 
       <button
         type="submit"
-        className="mt-4 inline-flex w-32 items-center justify-center rounded-full bg-sky-500 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(56,189,248,0.8)] transition hover:bg-sky-400"
+        className="mt-4 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
       >
         Submit
       </button>
-
-      <p className="text-xs text-slate-400 mt-2">
-        Remembered your password?{" "}
-        <Link
-          to="/login"
-          className="font-medium text-sky-400 hover:text-sky-300"
-        >
-          Back to login
-        </Link>
-      </p>
     </form>
   );
 };
-
