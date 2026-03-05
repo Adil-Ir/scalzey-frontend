@@ -31,32 +31,32 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (data: LoginFormValues) => {
-    // TODO: hook into real auth flow
     console.log("Login data", data);
   };
 
   const baseFieldClasses =
-    "rounded-full bg-transparent px-4 py-2.5 text-sm text-slate-50 transition-colors";
+    "rounded-full bg-transparent px-4 py-2.5 text-sm transition-colors text-gray-900 dark:text-slate-50";
 
   const getBorderClass = (hasError: boolean) =>
     hasError
       ? "border border-red-500"
-      : "border border-[#2D3D46] hover:border-[#44BCFF] focus-within:border-[#44BCFF]";
+      : "border border-gray-200 dark:border-[#2D3D46] hover:border-[#44BCFF] focus-within:border-[#44BCFF]";
+
+  const labelClass = "font-poppins text-[13.259px] font-normal leading-none text-gray-900 dark:text-white";
+  const inputClass = "w-full bg-transparent text-sm text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-400 outline-none border-none";
+  const showHideClass = "inline-flex items-center gap-1 text-[11px] md:text-xs text-gray-400 dark:text-slate-300 hover:text-gray-700 dark:hover:text-slate-50";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="space-y-1.5 mb-4">
-        <label
-          className="font-poppins text-[13.259px] mb-3 font-normal leading-none text-white"
-          htmlFor="email"
-        >
+        <label className={`${labelClass} mb-3`} htmlFor="email">
           Email address
         </label>
         <div className={`${baseFieldClasses} ${getBorderClass(!!errors.email)}`}>
           <input
             id="email"
             type="email"
-            className="w-full bg-transparent text-sm text-slate-50 placeholder-slate-400 outline-none border-none"
+            className={inputClass}
             placeholder="Enter your email"
             {...register("email")}
           />
@@ -68,33 +68,18 @@ export const LoginForm = () => {
 
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
-          <label
-            className="font-poppins text-[13.259px] font-normal leading-none text-white"
-            htmlFor="password"
-          >
+          <label className={labelClass} htmlFor="password">
             Password
           </label>
-          <button
-            type="button"
-            onClick={() => setShowPassword((prev) => !prev)}
-            className="inline-flex items-center gap-1 text-[11px] md:text-xs text-slate-300 hover:text-slate-50"
-          >
-            {showPassword ? (
-              <>
-                <FiEyeOff /> Hide
-              </>
-            ) : (
-              <>
-                <FiEye /> Show
-              </>
-            )}
+          <button type="button" onClick={() => setShowPassword((p) => !p)} className={showHideClass}>
+            {showPassword ? <><FiEyeOff /> Hide</> : <><FiEye /> Show</>}
           </button>
         </div>
         <div className={`${baseFieldClasses} flex items-center gap-2 ${getBorderClass(!!errors.password)}`}>
           <input
             id="password"
             type={showPassword ? "text" : "password"}
-            className="w-full bg-transparent text-sm text-slate-50 placeholder-slate-400 outline-none border-none"
+            className={inputClass}
             placeholder="Enter your password"
             {...register("password")}
           />
@@ -105,10 +90,10 @@ export const LoginForm = () => {
       </div>
 
       <div className="flex items-center justify-between text-xs mt-1">
-        <span className="text-slate-400"> </span>
+        <span />
         <Link
           to="/forgot-password"
-          className="text-xs text-[#FFFFFFBF] hover:text-sky-400"
+          className="text-xs text-gray-500 dark:text-[#FFFFFFBF] hover:text-sky-400"
         >
           Forgot Password
         </Link>
@@ -121,7 +106,7 @@ export const LoginForm = () => {
         >
           Login
         </button>
-        <p className="text-[13px] text-[#FFFFFFBF]">
+        <p className="text-[13px] text-gray-500 dark:text-[#FFFFFFBF]">
           Don&apos;t have an account?{" "}
           <Link to="/signup" className="text-[#44BCFF] underline">
             Sign Up

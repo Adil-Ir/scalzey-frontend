@@ -48,7 +48,7 @@ export const OtpForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-3">
-        <label className="font-poppins text-[13.259px] font-normal leading-none text-white">
+        <label className="font-poppins text-[13.259px] font-normal leading-none text-gray-900 dark:text-white">
           Enter OTP
         </label>
         <OTPInput
@@ -62,11 +62,11 @@ export const OtpForm = () => {
             <input
               {...inputProps}
               style={{ width: "76px", height: "46px" }}
-              className={`rounded-full border bg-transparent text-center text-lg text-slate-50 outline-none transition-colors
+              className={`rounded-full border bg-transparent text-center text-lg text-gray-900 dark:text-slate-50 outline-none transition-colors
                 ${
                   hasError
                     ? "border-red-500"
-                    : "border-[#2D3D46] hover:border-[#44BCFF] focus:border-[#44BCFF]"
+                    : "border-gray-200 dark:border-[#2D3D46] hover:border-[#44BCFF] focus:border-[#44BCFF]"
                 }`}
             />
           )}

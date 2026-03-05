@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { ForgotPasswordForm } from "./components/ForgotPasswordForm";
 import { IoIosArrowBack } from "react-icons/io";
+
 export const ForgotPasswordPage = () => {
   return (
-    <section className="w-full  rounded-[26.53px] bg-[#1D242A] px-17.5 pt-12.25 pb-24.5">
-      <div className="xl:mb-24 lg:mb-20 md:mb-16 mb-10  flex items-center justify-between">
+    <section className="w-full rounded-[26.53px] bg-white dark:bg-[#1D242A] px-17.5 pt-12.25 pb-24.5">
+      <div className="xl:mb-24 lg:mb-20 md:mb-16 mb-10 flex items-center justify-between">
         <Link
           to="/login"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-[#20303B]  text-white text-lg "
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-lg bg-gray-100 text-gray-600 dark:bg-[#20303B] dark:text-white"
         >
           <IoIosArrowBack />
         </Link>
@@ -15,10 +16,10 @@ export const ForgotPasswordPage = () => {
 
       <div className="space-y-6">
         <div className="space-y-1.5 xl:mb-10 mb-6">
-        <h2 className="font-poppins text-[28.23px] font-medium leading-none text-white">
+          <h2 className="font-poppins text-[28.23px] font-medium leading-none text-gray-900 dark:text-white">
             Forgot Password
           </h2>
-          <p className="text-sm text-[#FFFFFFBF]">
+          <p className="text-sm text-gray-500 dark:text-[#FFFFFFBF]">
             Please enter email associated with your account.
           </p>
         </div>
@@ -27,4 +28,3 @@ export const ForgotPasswordPage = () => {
     </section>
   );
 };
-

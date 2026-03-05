@@ -62,17 +62,17 @@ const NAV_SECTIONS: NavSection[] = [
       {
         to: "/messages/savannah-nguyen",
         label: "Savannah Nguyen",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-white text-[10px] font-semibold">S</span>,
+        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-[#FFFFFFBF] text-[10px] font-semibold">S</span>,
       },
       {
         to: "/messages/jenny-wilson",
         label: "Jenny Wilson",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-pink-600 text-white text-[10px] font-semibold">J</span>,
+        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-pink-600 text-[] text-[10px] font-semibold">J</span>,
       },
       {
         to: "/messages/guy-hawkins",
         label: "Guy Hawkins",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-600 text-white text-[10px] font-semibold">G</span>,
+        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-600 text-[#FFFFFFBF] text-[10px] font-semibold">G</span>,
       },
     ],
   },
@@ -94,12 +94,16 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
   const linkClass = (isActive: boolean) =>
     `flex items-center gap-3 rounded-lg px-3 py-2 transition-colors font-sora text-[14px] font-normal leading-[20.144px] ${
       collapsed ? "justify-center px-2" : ""
-    } ${isActive ? "text-[#44BCFF] [&_svg]:text-[#44BCFF] [&_span]:text-[#44BCFF]" : "text-[rgba(255,255,255,0.75)] hover:text-white"}`;
+    } ${
+      isActive
+        ? "text-[#44BCFF] [&_svg]:text-[#44BCFF] [&_span]:text-[#44BCFF]"
+        : "text-gray-500 hover:text-gray-900 dark:text-[rgba(255,255,255,0.75)] dark:hover:text-white"
+    }`;
 
   return (
     <aside
-      className={`hidden md:flex flex-col bg-[#0F161A] border-r border-[#2D3D46] py-6 transition-all duration-300 ${
-        collapsed ? "w-18 px-2 items-center" : "w-64 px-5"
+      className={`hidden md:flex flex-col border-r py-6 transition-all duration-300 h-screen overflow-hidden bg-white border-gray-200 dark:bg-[#0F161A] dark:border-[#2D3D46] shrink-0 z-50 ${
+        collapsed ? "w-18 px-2 items-center" : "w-60.5 px-5"
       }`}
     >
       {/* Logo */}
@@ -108,20 +112,20 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
           <div className="h-9 w-9 rounded-full bg-sky-400/90 flex items-center justify-center text-slate-950 font-bold text-sm shrink-0">
             CO
           </div>
-          {!collapsed && (
-            <span className="text-xl font-semibold tracking-tight">techy</span>
-          )}
+            {!collapsed && (
+              <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">techy</span>
+            )}
         </div>
       </div>
 
       {/* Nav */}
-      <div className="flex-1 space-y-6 overflow-y-auto overflow-x-hidden w-full">
+      <div className="flex-1 space-y-6 overflow-y-auto overflow-x-hidden w-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {NAV_SECTIONS.map((section, i) => (
           <div key={section.heading}>
-            {i > 0 && <hr className="border-slate-800 mb-4" />}
+            {i > 0 && <hr className="border-gray-200 dark:border-[#2D3D46] mb-4" />}
             <section className="space-y-1">
               {!collapsed && (
-                <p className="uppercase tracking-[0.16em] text-[10px] text-slate-500 px-3 mb-2">
+                <p className="uppercase text-[10px] px-3 mb-2 text-gray-400 dark:text-slate-500">
                   {section.heading}
                 </p>
               )}

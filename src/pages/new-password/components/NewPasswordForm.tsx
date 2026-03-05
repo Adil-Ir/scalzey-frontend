@@ -40,101 +40,62 @@ export const NewPasswordForm = () => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = (_data: NewPasswordFormValues) => {
-    // TODO: update password via API
     navigate("/login");
   };
 
   const baseFieldClasses =
-    "rounded-full bg-transparent px-4 py-2.5 text-sm text-slate-50 transition-colors";
+    "rounded-full bg-transparent px-4 py-2.5 text-sm transition-colors text-gray-900 dark:text-slate-50";
 
   const getBorderClass = (hasError: boolean) =>
     hasError
       ? "border border-red-500"
-      : "border border-[#2D3D46] hover:border-[#44BCFF] focus-within:border-[#44BCFF]";
+      : "border border-gray-200 dark:border-[#2D3D46] hover:border-[#44BCFF] focus-within:border-[#44BCFF]";
+
+  const labelClass = "font-poppins text-[13.259px] font-normal leading-none text-gray-900 dark:text-white";
+  const inputClass = "w-full bg-transparent text-sm text-gray-900 dark:text-slate-50 placeholder-gray-400 dark:placeholder-slate-400 outline-none border-none";
+  const showHideClass = "inline-flex items-center gap-1 text-[11px] md:text-xs text-gray-400 dark:text-slate-300 hover:text-gray-700 dark:hover:text-slate-50";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
-          <label
-            className="font-poppins text-[13.259px] font-normal leading-none text-white"
-            htmlFor="password"
-          >
-            New password
-          </label>
-          <button
-            type="button"
-            onClick={() => setShowPassword((prev) => !prev)}
-            className="inline-flex items-center gap-1 text-[11px] md:text-xs text-slate-300 hover:text-slate-50"
-          >
-            {showPassword ? (
-              <>
-                <FiEyeOff /> Hide
-              </>
-            ) : (
-              <>
-                <FiEye /> Show
-              </>
-            )}
+          <label className={labelClass} htmlFor="password">New password</label>
+          <button type="button" onClick={() => setShowPassword((p) => !p)} className={showHideClass}>
+            {showPassword ? <><FiEyeOff /> Hide</> : <><FiEye /> Show</>}
           </button>
         </div>
-        <div
-          className={`${baseFieldClasses} flex items-center gap-2 ${getBorderClass(!!errors.password)}`}
-        >
+        <div className={`${baseFieldClasses} flex items-center gap-2 ${getBorderClass(!!errors.password)}`}>
           <input
             id="password"
             type={showPassword ? "text" : "password"}
-            className="w-full bg-transparent text-sm text-slate-50 placeholder-slate-400 outline-none border-none"
+            className={inputClass}
             placeholder="Create a strong password"
             {...register("password")}
           />
         </div>
         {errors.password && (
-          <p className="mt-1 text-[11px] text-red-500">
-            {errors.password.message}
-          </p>
+          <p className="mt-1 text-[11px] text-red-500">{errors.password.message}</p>
         )}
       </div>
 
       <div className="space-y-1.5">
         <div className="flex items-center justify-between">
-          <label
-            className="font-poppins text-[13.259px] font-normal leading-none text-white"
-            htmlFor="confirmPassword"
-          >
-            Confirm password
-          </label>
-          <button
-            type="button"
-            onClick={() => setShowConfirm((prev) => !prev)}
-            className="inline-flex items-center gap-1 text-[11px] md:text-xs text-slate-300 hover:text-slate-50"
-          >
-            {showConfirm ? (
-              <>
-                <FiEyeOff /> Hide
-              </>
-            ) : (
-              <>
-                <FiEye /> Show
-              </>
-            )}
+          <label className={labelClass} htmlFor="confirmPassword">Confirm password</label>
+          <button type="button" onClick={() => setShowConfirm((p) => !p)} className={showHideClass}>
+            {showConfirm ? <><FiEyeOff /> Hide</> : <><FiEye /> Show</>}
           </button>
         </div>
-        <div
-          className={`${baseFieldClasses} flex items-center gap-2 ${getBorderClass(!!errors.confirmPassword)}`}
-        >
+        <div className={`${baseFieldClasses} flex items-center gap-2 ${getBorderClass(!!errors.confirmPassword)}`}>
           <input
             id="confirmPassword"
             type={showConfirm ? "text" : "password"}
-            className="w-full bg-transparent text-sm text-slate-50 placeholder-slate-400 outline-none border-none"
+            className={inputClass}
             placeholder="Repeat your password"
             {...register("confirmPassword")}
           />
         </div>
         {errors.confirmPassword && (
-          <p className="mt-1 text-[11px] text-red-500">
-            {errors.confirmPassword.message}
-          </p>
+          <p className="mt-1 text-[11px] text-red-500">{errors.confirmPassword.message}</p>
         )}
       </div>
 
@@ -142,7 +103,7 @@ export const NewPasswordForm = () => {
         type="submit"
         className="mt-4 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
       >
-        Save
+        Save password
       </button>
     </form>
   );

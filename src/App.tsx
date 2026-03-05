@@ -1,5 +1,6 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
 import { AuthLayout } from "./layouts/AuthLayout";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { LoginPage } from "./pages/login";
@@ -7,10 +8,10 @@ import { SignupPage } from "./pages/signup";
 import { ForgotPasswordPage } from "./pages/forgot-password";
 import { OtpPage } from "./pages/otp";
 import { NewPasswordPage } from "./pages/new-password";
-import { HomePage } from "./pages/dashboard/HomePage";
+import { HomePage } from "./pages/home";
 import { MainDashboardPage } from "./pages/dashboard/MainDashboardPage";
-import { EventsWorkshopsPage } from "./pages/dashboard/EventsWorkshopsPage";
-import { CalendarPage } from "./pages/dashboard/CalendarPage";
+import { EventsWorkshopsPage } from "./pages/events-workshops";
+import { CalendarPage } from "./pages/calendar";
 import { CoursesExplorePage } from "./pages/dashboard/CoursesExplorePage";
 import { CoursesEnrolledPage } from "./pages/dashboard/CoursesEnrolledPage";
 import { CoursesResultsPage } from "./pages/dashboard/CoursesResultsPage";
@@ -28,6 +29,7 @@ import { UpdatesPage } from "./pages/dashboard/UpdatesPage";
 
 const App = () => {
   return (
+    <ThemeProvider>
     <BrowserRouter>
       <Routes>
         <Route element={<AuthLayout />}>
@@ -76,6 +78,7 @@ const App = () => {
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
+    </ThemeProvider>
   );
 };
 
