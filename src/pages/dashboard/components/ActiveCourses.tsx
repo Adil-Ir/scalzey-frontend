@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { HiOutlineInformationCircle } from "react-icons/hi";
-import { FiCheck } from "react-icons/fi";
+import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 import { MdOutlineGridView, MdOutlineMenuBook, MdOutlineQuiz } from "react-icons/md";
 import { BsPeopleFill } from "react-icons/bs";
 
@@ -102,7 +102,7 @@ const ProgressRing = ({ percent }: { percent: number }) => {
   return (
     <svg width="40" height="40" className="-rotate-90">
       <circle cx="20" cy="20" r={r} fill="none" stroke="currentColor" strokeWidth="3" className="text-gray-100 dark:text-white/10" />
-      <circle cx="20" cy="20" r={r} fill="none" stroke="#44BCFF" strokeWidth="3"
+      <circle cx="20" cy="20" r={r} fill="none" stroke="#3CC982" strokeWidth="3"
         strokeDasharray={`${dash} ${circ - dash}`} strokeLinecap="round" />
     </svg>
   );
@@ -111,7 +111,7 @@ const ProgressRing = ({ percent }: { percent: number }) => {
 export const ActiveCourses = () => {
   return (
     <div>
-      <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-3">
+      <h2 className="text-lg text-[#0F161A]  dark:text-white mb-3">
         Active Courses
       </h2>
 
@@ -135,19 +135,19 @@ export const ActiveCourses = () => {
             >
               {/* Status + progress ring */}
               <div className="flex items-center justify-between">
-                <span className={`text-[11px] font-medium px-3 py-1 rounded-full ${course.statusColor}`}>
+                <span className={`text-[11px] text-[#FF9B44]  px-3 py-1 rounded-full border border-[#FF9B44]`}>
                   {course.status}
                 </span>
                 <div className="relative flex items-center justify-center">
                   <ProgressRing percent={course.progress} />
-                  <span className="absolute text-[9px] font-bold text-gray-700 dark:text-white rotate-90">
+                  <span className="absolute text-[9px] font-bold text-gray-700 dark:text-white ">
                     {course.progress}%
                   </span>
                 </div>
               </div>
 
               {/* Title */}
-              <h3 className="text-[15px] font-semibold leading-snug text-gray-900 dark:text-white">
+              <h3 className="text-lg font-semibold leading-snug text-[#0F161A] dark:text-white">
                 {course.title}
               </h3>
 
@@ -160,7 +160,7 @@ export const ActiveCourses = () => {
               </div>
 
               {/* Module / Lessons / Quiz */}
-              <div className="flex items-center gap-3 text-[11px] text-gray-500 dark:text-slate-400">
+              <div className="flex w-full justify-between items-center gap-3 text-[11px] text-gray-500 dark:text-[#99A2A8]">
                 <span className="flex items-center gap-1">
                   <MdOutlineGridView size={13} />
                   {course.modules} Module
@@ -196,29 +196,34 @@ export const ActiveCourses = () => {
               </div>
 
               {/* Quiz alert */}
-              <div className="flex items-center justify-between rounded-xl bg-gray-50 dark:bg-[#141E22] px-3 py-2">
-                <div className="flex items-center gap-2">
-                  <HiOutlineInformationCircle size={14} className="text-gray-400 dark:text-slate-500 shrink-0" />
-                  <span className="text-[11px] text-gray-500 dark:text-slate-400">
+              <div className=" rounded-xl bg-gray-50 dark:bg-[#44BCFF14] px-3.5 py-2.5">
+               <div className="flex items-center justify-between">
+                 <div className="flex items-center gap-2">
+                  <HiOutlineInformationCircle size={20} className="text-gray-400 dark:text-white shrink-0" />
+                  <span className="text-[12px] text-gray-500 dark:text-white">
                     you have a quiz remaining
                   </span>
                 </div>
-                <button type="button" className="text-gray-400 dark:text-slate-500 hover:opacity-80 transition">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Checkmarks */}
-              <div className="flex items-center gap-3 flex-wrap">
+                       <button
+                            type="button"
+                            style={{ borderRadius: "50%" }}
+                            className="shrink-0 inline-flex h-8 w-8 items-center justify-center hover:border border-[#0F161A33] dark:border-[#ffffff33] text-[#0F161ABF] dark:text-white hover:border-current transition"
+                          >
+                            <FiArrowUpRight size={21} />
+                          </button>
+               </div>
+                   {/* Checkmarks */}
+              <div className="flex items-center gap-3 mt-3.5 flex-wrap">
                 {course.checks.map((c, i) => (
-                  <span key={i} className="flex items-center gap-1 text-[11px] text-gray-500 dark:text-slate-400">
-                    <FiCheck size={12} className="text-emerald-400 shrink-0" />
+                  <span key={i} className="flex items-center gap-2 text-[12px] text-gray-500 dark:text-white">
+                    <FiCheck size={16} className="text-[#3CC982] shrink-0" />
                     {c}
                   </span>
                 ))}
               </div>
+              </div>
+
+          
 
               {/* Join button */}
               <button

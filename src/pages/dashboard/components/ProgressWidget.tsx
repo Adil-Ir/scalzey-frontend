@@ -21,9 +21,11 @@ export const ProgressWidget = () => {
       style={{ borderRadius: "26.53px", padding: "24px" }}
     >
       {/* Header */}
-      <div className="flex items-center gap-2 mb-5">
-        <HiOutlineInformationCircle size={18} className="text-gray-600 dark:text-white shrink-0" />
-        <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Progress</h3>
+         <div className="flex gap-3 mb-5 ">
+       <HiOutlineInformationCircle className="shrink-0 " size={24} />
+        <h3 className="xl:text-lg text-base text-[#0F161A] leading-tight dark:text-white">
+          Progress
+        </h3>
       </div>
 
       <div className="flex flex-col gap-5 flex-1">

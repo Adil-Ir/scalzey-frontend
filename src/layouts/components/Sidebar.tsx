@@ -102,7 +102,7 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
 
   return (
     <aside
-      className={`hidden md:flex flex-col border-r py-6 transition-all duration-300 h-screen overflow-hidden bg-white border-gray-200 dark:bg-[#0F161A] dark:border-[#2D3D46] shrink-0 z-50 ${
+      className={`hidden md:flex flex-col border-r py-6 transition-all duration-300 min-h-screen bg-white border-gray-200 dark:bg-[#0F161A] dark:border-[#2D3D46] shrink-0 z-50 ${
         collapsed ? "w-18 px-2 items-center" : "w-60.5 px-5"
       }`}
     >

@@ -137,3 +137,68 @@ body {
 .react-tel-input .country-list {
   @apply !bg-slate-900 !text-slate-50;
 }
+
+/* Dashboard calendar (react-calendar) */
+.dashboard-calendar {
+  border: none;
+  background: transparent;
+  width: 100%;
+}
+
+.dashboard-calendar .react-calendar__navigation {
+  display: none;
+}
+
+.dashboard-calendar .react-calendar__viewContainer {
+  width: 100%;
+}
+
+.dashboard-calendar .react-calendar__month-view {
+  width: 100%;
+}
+
+.dashboard-calendar .react-calendar__month-view > div,
+.dashboard-calendar .react-calendar__month-view > div > div {
+  width: 100% !important;
+}
+
+.dashboard-calendar .react-calendar__month-view__weekdays {
+  text-transform: none;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgb(148 163 184);
+  width: 100%;
+}
+
+.dashboard-calendar .react-calendar__month-view__weekdays__weekday {
+  padding: 4px 0;
+  text-align: center;
+  flex: 1;
+}
+
+.dashboard-calendar .react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
+.dashboard-calendar .react-calendar__month-view__days {
+  width: 100%;
+}
+
+.dashboard-calendar .react-calendar__tile {
+  background: transparent;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 100%;
+}
+
+.dashboard-calendar .react-calendar__tile--now {
+  background: transparent;
+}
+
+.dashboard-calendar-tile {
+  transition: background-color 150ms ease, border-color 150ms ease,
+    color 150ms ease, opacity 150ms ease;
+}

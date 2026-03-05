@@ -12,8 +12,8 @@ import { HomePage } from "./pages/home";
 import { MainDashboardPage } from "./pages/dashboard/MainDashboardPage";
 import { EventsWorkshopsPage } from "./pages/events-workshops";
 import { CalendarPage } from "./pages/calendar";
-import { CoursesExplorePage } from "./pages/dashboard/CoursesExplorePage";
-import { CoursesEnrolledPage } from "./pages/dashboard/CoursesEnrolledPage";
+import { ExploreCourses } from "./pages/explore-course";
+import { EnrolledCoursesPage } from "./pages/enrolled-course";
 import { CoursesResultsPage } from "./pages/dashboard/CoursesResultsPage";
 import { CommunityExplorePage } from "./pages/dashboard/CommunityExplorePage";
 import { CommunityGekiLearnPage } from "./pages/dashboard/CommunityGekiLearnPage";
@@ -46,8 +46,8 @@ const App = () => {
           <Route path="/events-workshops" element={<EventsWorkshopsPage />} />
           <Route path="/calendar" element={<CalendarPage />} />
 
-          <Route path="/courses/explore" element={<CoursesExplorePage />} />
-          <Route path="/courses/enrolled" element={<CoursesEnrolledPage />} />
+          <Route path="/courses/explore" element={<ExploreCourses />} />
+          <Route path="/courses/enrolled" element={<EnrolledCoursesPage />} />
           <Route path="/courses/results" element={<CoursesResultsPage />} />
 
           <Route path="/community/explore" element={<CommunityExplorePage />} />
