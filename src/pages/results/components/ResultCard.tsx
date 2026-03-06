@@ -1,8 +1,6 @@
 import { FiArrowUpRight } from "react-icons/fi";
-import { MdOutlineQuiz } from "react-icons/md";
-import { HiOutlineBookOpen } from "react-icons/hi";
 import { VideoThumbnail } from "./VideoThumbnail";
-
+import { BsCardText } from "react-icons/bs";
 interface GuideItem {
   label: string;
 }
@@ -40,7 +38,6 @@ export const ResultCard = ({ course }: { course: CourseResult }) => {
     >
       {/* ── TOP GRID: heading/description | video ── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-6">
-
         {/* Left — instructor + title + description */}
         <div className="flex flex-col gap-3">
           {/* Instructor */}
@@ -69,105 +66,109 @@ export const ResultCard = ({ course }: { course: CourseResult }) => {
         {/* Right — video thumbnail */}
         <div className="flex justify-end">
           <div className="aspect-video rounded-xl overflow-hidden w-2/3">
-          <VideoThumbnail
-            instructorName={course.instructor}
-            instructorColor={course.instructorColor}
-            caption={course.video.caption}
-            gradientBg={course.video.gradientBg}
-          />
-        </div>
+            <VideoThumbnail
+              instructorName={course.instructor}
+              instructorColor={course.instructorColor}
+              caption={course.video.caption}
+              gradientBg={course.video.gradientBg}
+            />
+          </div>
         </div>
       </div>
 
-      {/* ── DIVIDER ── */}
-      <div className="border-t border-[#2D3D46]" />
-
-      {/* ── BOTTOM FULL-WIDTH SECTION ── */}
-      <div className="p-6 flex flex-col gap-5">
-
-        {/* Results row */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <MdOutlineQuiz size={15} className="text-gray-400 dark:text-slate-500" />
-            <span className="text-[13px] font-semibold text-gray-700 dark:text-slate-200">
-              Results
-            </span>
-          </div>
-
-          {/* Grade | Questions | Retake — inner card */}
-          <div
-            className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-gray-50 dark:bg-[#141E22] px-5 py-4"
-            style={{ borderRadius: "16px", border: "1px solid #2D3D46" }}
-          >
-            {/* Grade */}
-            <div className="flex flex-col gap-1 justify-center">
-              <p className="text-[15px] font-bold text-gray-900 dark:text-white">
-                Your grade:{" "}
-                <span className={isPassed ? "text-emerald-400" : "text-red-400"}>
-                  {result.grade.toFixed(2)}%
-                </span>
-              </p>
-              <p className="text-[12px] text-gray-500 dark:text-slate-400">
-                Status:{" "}
-                <span className={isPassed ? "text-emerald-400 font-medium" : "text-red-400 font-medium"}>
-                  {result.status}
-                </span>
-                &nbsp;&nbsp;Score: {result.score}
-              </p>
-            </div>
-
-            {/* Questions */}
-            <div className="flex flex-col gap-1 justify-center">
-              <p className="text-[15px] font-bold text-gray-900 dark:text-white">
-                Questions
-              </p>
-              <p className="text-[12px] text-gray-500 dark:text-slate-400">
-                Total: {result.totalQuestions}&nbsp;&nbsp;Correct Answer: {result.correctAnswers}
-              </p>
-            </div>
-
-            {/* Retake */}
-            <div className="flex items-center justify-start sm:justify-end">
-              <button
-                type="button"
-                className="w-full sm:w-auto px-8 py-2.5 rounded-full bg-[#44BCFF] text-white text-[13px] font-medium hover:bg-[#2eaef5] transition"
-              >
-                Retake Quizz
-              </button>
-            </div>
-          </div>
+      <div>
+        <div className="flex items-center gap-2 px-6">
+          <BsCardText size={18} className="text-gray-400 dark:text-white" />
+          <span className="text-[16px] font-semibold text-gray-700 dark:text-slate-200">
+            Results
+          </span>
         </div>
 
-        {/* Guide row */}
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <HiOutlineBookOpen size={15} className="text-gray-400 dark:text-slate-500" />
-            <span className="text-[13px] font-semibold text-gray-700 dark:text-slate-200">
-              Guide
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {result.guides.map((g, i) => (
-              <div
-                key={i}
-                className="flex items-center justify-between gap-2 bg-gray-50 dark:bg-[#141E22] px-4 py-3 rounded-xl"
-                style={{ border: "1px solid #2D3D46" }}
-              >
-                <p className="text-[12px] text-gray-500 dark:text-slate-400 min-w-0 truncate">
-                  Check:{" "}
-                  <span className="font-semibold text-gray-800 dark:text-white">
-                    {g.label}
+        <div className="p-6 ">
+          <div className="px-10 py-8 border border-[#2D3D46] rounded-3xl">
+            <div className="grid grid-cols-1 sm:grid-cols-3  xl:gap-16 gap-6">
+              {/* Grade */}
+              <div className="flex flex-col gap-1 h-fit justify-center border-r border-[#2D3D46] pr-4">
+                <p className="lg:text-[26px] text-xl font-semibold mb-1 text-gray-900 dark:text-white">
+                  Your grade:{" "}
+                  <span
+                    className={isPassed ? "text-emerald-400" : "text-red-400"}
+                  >
+                    {result.grade.toFixed(2)}%
                   </span>
                 </p>
+                <p className="text-[14px] text-gray-500 dark:text-white">
+                  Status:{" "}
+                  <span
+                    className={
+                      isPassed
+                        ? "text-emerald-400 font-medium"
+                        : "text-red-400 font-medium"
+                    }
+                  >
+                    {result.status}
+                  </span>
+                  &nbsp;&nbsp;Score: {result.score}
+                </p>
+              </div>
+
+              {/* Questions */}
+              <div className="flex flex-col items-center gap-1 justify-center border-r border-[#2D3D46] pr-4">
+               <div>
+                 <p className="lg:text-[26px] text-xl font-semibold mb-1 text-gray-900 dark:text-white">
+                  Questions
+                </p>
+                <p className="text-[14px] text-gray-500 dark:text-white">
+                  Total: {result.totalQuestions}&nbsp;&nbsp;Correct Answer:{" "}
+                  {result.correctAnswers}
+                </p>
+               </div>
+              </div>
+
+              {/* Retake */}
+              <div className="flex items-center justify-start sm:justify-end">
                 <button
                   type="button"
-                  className="shrink-0 h-6 w-6 rounded-full flex items-center justify-center border border-[#2D3D46] text-gray-400 dark:text-slate-400 hover:opacity-80 transition"
+                  className="w-full sm:w-auto px-16 py-3 cursor-pointer rounded-full bg-[#44BCFF] text-white text-[13px] font-medium hover:bg-[#2eaef5] transition"
                 >
-                  <FiArrowUpRight size={13} />
+                  Retake Quizz
                 </button>
               </div>
-            ))}
+            </div>
+            {/* Guide row */}
+            <div>
+              <div className="flex items-center gap-2.5 mb-3 border-t border-[#2D3D46] pt-2 mt-5">
+                <BsCardText
+                  size={18}
+                  className="text-gray-400 dark:text-white"
+                />
+                <span className="text-[16px] font-semibold text-gray-700 dark:text-slate-200">
+                  Guide
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {result.guides.map((g, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center justify-between gap-2 bg-gray-50 dark:bg-[#20303B] px-4 py-3 rounded-xl"
+                  >
+                    <p className="text-[12px] text-gray-400 dark:text-white min-w-0 ">
+                      Check:{" "}
+                      <span className="font-semibold text-gray-800 dark:text-white">
+                        {g.label}
+                      </span>
+                    </p>
+                    <button
+                      type="button"
+                      className="shrink-0 h-6 w-6 rounded-full flex items-center justify-center text-gray-400 dark:text-white"
+                    >
+                      <FiArrowUpRight size={18} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

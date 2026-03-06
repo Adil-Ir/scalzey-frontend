@@ -19,14 +19,14 @@ export const AuthLayout = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-[1440px] mx-auto h-screen w-full p-4 md:p-6 xl:p-10">
+      <div className="max-w-360 mx-auto h-screen w-full p-4 md:p-6 xl:p-10">
         {/* Theme toggle — top right */}
         <div className="w-full flex justify-between items-center">
           <div className="">
             <img
               src={logo}
               alt="Cotechy"
-              className="w-[200px] h-[52px] object-contain"
+              className="w-50 h-13 object-contain"
             />
           </div>
           <button

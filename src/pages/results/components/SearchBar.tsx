@@ -6,8 +6,8 @@ interface SearchBarProps {
 }
 
 export const SearchBar = ({ value, onChange }: SearchBarProps) => (
-  <div className="flex items-center gap-2.5 rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-[#141E22] px-4 py-2.5 w-full sm:w-72">
-    <HiOutlineSearch size={15} className="text-gray-400 dark:text-slate-500 shrink-0" />
+  <div className="flex items-center gap-2.5 rounded-full b bg-white dark:bg-[#1D242A] px-4 py-2.5 w-full sm:w-72">
+    <HiOutlineSearch size={15} className="text-gray-400 dark:text-[#868E96] shrink-0" />
     <input
       type="text"
       value={value}
