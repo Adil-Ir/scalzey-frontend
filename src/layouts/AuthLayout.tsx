@@ -30,7 +30,7 @@ export const AuthLayout = () => {
       </div>
 
       <div className="min-h-screen flex items-center">
-        <div className="w-full max-w-8xl mx-auto px-8 lg:px-16">
+        <div className="w-full max-w-[1140px] mx-auto px-8 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             <AuthHero />
 
