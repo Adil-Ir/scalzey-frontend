@@ -28,7 +28,9 @@ export const DashboardLayout = () => {
 
   const pageTitle =
     PAGE_TITLES[pathname] ??
-    (pathname.startsWith("/courses/detail/") ? "Course Details" : "Dashboard");
+    (pathname.startsWith("/courses/detail/") ? "Course Details" :
+    pathname.startsWith("/classroom/") ? "Classroom" :
+    "Dashboard");
 
   return (
     <div className="h-screen overflow-hidden flex bg-[#F6F8F9] text-gray-900 dark:bg-[#0F161A] dark:text-slate-50">

@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { BsPeopleFill } from "react-icons/bs";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 import {
@@ -57,6 +58,7 @@ const ProgressRing = ({ percent }: { percent: number }) => {
 };
 
 export const EnrolledCourseCard = ({ course }: { course: EnrolledCourse }) => {
+  const navigate = useNavigate();
   return (
     <div
       className="h-full flex flex-col gap-3 bg-white dark:bg-[#1D242A]"
@@ -162,6 +164,7 @@ export const EnrolledCourseCard = ({ course }: { course: EnrolledCourse }) => {
       {/* Join button */}
       <button
         type="button"
+        onClick={() => navigate(`/classroom/${course.id}`)}
         className="mt-auto w-full py-2.5 rounded-full bg-[#44BCFF] text-white text-[13px] font-medium hover:bg-[#2eaef5] transition"
       >
         Join the class
