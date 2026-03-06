@@ -11,7 +11,6 @@ export const AuthHero = () => {
           />
         </div>
     
-      <section> </section>
       <main className="">
         <h1 className="font-semibold text-[40px] md:text-[72px] lg:text-[108.115px] leading-[112.694%] tracking-[-10.812px] text-white">
           Build Your{" "}<br/>

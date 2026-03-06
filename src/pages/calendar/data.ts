@@ -30,12 +30,12 @@ export const CALENDAR_EVENTS: CalendarEvent[] = [
   },
   // Monthly events (Mar 2026)
   {
-    id: 4, title: "Vitua event",
+    id: 4,     title: "Virtual event",
     date: new Date(2026, 2, 1), startHour: 10, startMin: 0, durationMin: 60,
     borderColor: "border-[#44BCFF]", bgColor: "bg-[#44BCFF]/10", textColor: "text-[#44BCFF]",
   },
   {
-    id: 5, title: "Vitua event",
+    id: 5,     title: "Virtual event",
     date: new Date(2026, 2, 6), startHour: 10, startMin: 0, durationMin: 60,
     borderColor: "border-[#44BCFF]", bgColor: "bg-[#44BCFF]/10", textColor: "text-[#44BCFF]",
   },
@@ -45,7 +45,7 @@ export const CALENDAR_EVENTS: CalendarEvent[] = [
     borderColor: "border-orange-400", bgColor: "bg-orange-400/10", textColor: "text-orange-400",
   },
   {
-    id: 7, title: "Vitua event",
+    id: 7,     title: "Virtual event",
     date: new Date(2026, 2, 11), startHour: 10, startMin: 0, durationMin: 60,
     borderColor: "border-[#44BCFF]", bgColor: "bg-[#44BCFF]/10", textColor: "text-[#44BCFF]",
   },
@@ -55,7 +55,7 @@ export const CALENDAR_EVENTS: CalendarEvent[] = [
     borderColor: "border-orange-400", bgColor: "bg-orange-400/10", textColor: "text-orange-400",
   },
   {
-    id: 9, title: "Vitua event",
+    id: 9,     title: "Virtual event",
     date: new Date(2026, 2, 19), startHour: 10, startMin: 0, durationMin: 60,
     borderColor: "border-[#44BCFF]", bgColor: "bg-[#44BCFF]/10", textColor: "text-[#44BCFF]",
   },

@@ -14,7 +14,7 @@ import { EventsWorkshopsPage } from "./pages/events-workshops";
 import { CalendarPage } from "./pages/calendar";
 import { ExploreCourses } from "./pages/explore-course";
 import { EnrolledCoursesPage } from "./pages/enrolled-course";
-import { CoursesResultsPage } from "./pages/dashboard/CoursesResultsPage";
+import { CoursesResultsPage } from "./pages/results";
 import { CommunityExplorePage } from "./pages/dashboard/CommunityExplorePage";
 import { CommunityGekiLearnPage } from "./pages/dashboard/CommunityGekiLearnPage";
 import { CommunityProductVisualsPage } from "./pages/dashboard/CommunityProductVisualsPage";

@@ -18,7 +18,7 @@ interface EventItem {
 const EVENTS: EventItem[] = [
   {
     id: 1,
-    title: "Motivational techniques that are necessory for you to improve your thinking",
+    title: "Motivational techniques that are necessary for you to improve your thinking",
     type: "Virtual Event",
     members: "245+",
     daysLeft: "12 days remaining",
@@ -28,7 +28,7 @@ const EVENTS: EventItem[] = [
   },
   {
     id: 2,
-    title: "Motivational techniques that are necessory for you to improve your thinking",
+    title: "Motivational techniques that are necessary for you to improve your thinking",
     type: "Virtual Event",
     members: "245+",
     daysLeft: "12 days remaining",
@@ -38,7 +38,7 @@ const EVENTS: EventItem[] = [
   },
   {
     id: 3,
-    title: "Motivational techniques that are necessory for you to improve your thinking",
+    title: "Motivational techniques that are necessary for you to improve your thinking",
     type: "Virtual Event",
     members: "245+",
     daysLeft: "12 days remaining",
@@ -48,7 +48,7 @@ const EVENTS: EventItem[] = [
   },
   {
     id: 4,
-    title: "Motivational techniques that are necessory for you to improve your thinking",
+    title: "Motivational techniques that are necessary for you to improve your thinking",
     type: "Virtual Event",
     members: "245+",
     daysLeft: "12 days remaining",
@@ -58,7 +58,7 @@ const EVENTS: EventItem[] = [
   },
   {
     id: 5,
-    title: "Motivational techniques that are necessory for you to improve your thinking",
+    title: "Motivational techniques that are necessary for you to improve your thinking",
     type: "Virtual Event",
     members: "245+",
     daysLeft: "12 days remaining",
@@ -68,7 +68,7 @@ const EVENTS: EventItem[] = [
   },
   {
     id: 6,
-    title: "Motivational techniques that are necessory for you to improve your thinking",
+    title: "Motivational techniques that are necessary for you to improve your thinking",
     type: "Virtual Event",
     members: "245+",
     daysLeft: "12 days remaining",

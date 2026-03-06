@@ -15,8 +15,11 @@ const PAGE_TITLES: Record<string, string> = {
   "/community/geki-learn":      "Geki Learn",
   "/community/product-visuals": "Product Visuals",
   "/community/dev-crown":       "Dev Crown",
-  "/messages/chats":            "Chats",
-  "/updates":                   "Updates",
+  "/messages/chats":                "Chats",
+  "/messages/savannah-nguyen":     "Savannah Nguyen",
+  "/messages/jenny-wilson":        "Jenny Wilson",
+  "/messages/guy-hawkins":         "Guy Hawkins",
+  "/updates":                      "Updates",
 };
 
 export const DashboardLayout = () => {

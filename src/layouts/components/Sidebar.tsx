@@ -67,7 +67,7 @@ const NAV_SECTIONS: NavSection[] = [
       {
         to: "/messages/jenny-wilson",
         label: "Jenny Wilson",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-pink-600 text-[] text-[10px] font-semibold">J</span>,
+        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-pink-600 text-[#FFFFFFBF] text-[10px] font-semibold">J</span>,
       },
       {
         to: "/messages/guy-hawkins",

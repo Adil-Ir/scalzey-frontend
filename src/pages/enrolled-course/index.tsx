@@ -144,7 +144,7 @@ export const EnrolledCoursesPage = () => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for communities"
+            placeholder="Search for courses"
             className="flex-1 bg-transparent text-sm text-gray-700 dark:text-slate-200 placeholder-gray-400 dark:placeholder-slate-500 outline-none border-none"
           />
         </div>

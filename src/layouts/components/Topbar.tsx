@@ -120,7 +120,7 @@ export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
                 Setalia Green
               </span>
               <span className="text-[11px] text-gray-400 dark:text-slate-400">
-                mstellag@gamil.com
+                mstellag@gmail.com
               </span>
             </div>
             <FiChevronDown
