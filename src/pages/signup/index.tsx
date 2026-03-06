@@ -3,7 +3,7 @@ import TabPills from "./components/TabPills";
 
 export const SignupPage = () => {
   return (
-    <section className="w-full rounded-[26.53px] bg-white dark:bg-[#1D242A] pt-12.25 px-16 pb-[70.565px]">
+    <section className="w-full rounded-[26px] bg-white dark:bg-[#1D242A] p-12 xl:p-16">
       <TabPills />
       <div className="">
         <div className="2xl:mb-10 xl:mb-8 mb-6">

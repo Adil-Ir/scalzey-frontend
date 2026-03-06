@@ -4,7 +4,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 export const OtpPage = () => {
   return (
-    <section className="w-full rounded-[26.53px] bg-white dark:bg-[#1D242A] px-17.5 pt-12.25 pb-24.5">
+    <section className="w-full rounded-[26px] bg-white dark:bg-[#1D242A] p-12 xl:p-16">
       <div className="mb-22.75 flex items-center justify-between">
         <Link
           to="/forgot-password"
