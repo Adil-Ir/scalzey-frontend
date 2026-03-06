@@ -14,7 +14,7 @@ export const VideoThumbnail = ({
   gradientBg,
 }: VideoThumbnailProps) => (
   <div
-    className={`relative h-full min-h-[220px] w-full bg-gradient-to-br ${gradientBg} flex items-center justify-center overflow-hidden`}
+    className={`relative h-full min-h-55 w-full bg-linear-to-br ${gradientBg} flex items-center justify-center overflow-hidden`}
     style={{ borderRadius: "18px" }}
   >
     {/* Play button */}

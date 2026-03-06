@@ -1,4 +1,5 @@
 import { FiStar } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export interface Course {
   id: number;
@@ -27,6 +28,7 @@ const MemberAvatars = ({ color }: { color: string }) => (
 );
 
 export const CourseCard = ({ course }: { course: Course }) => {
+  const navigate = useNavigate();
   return (
     <div
       className="h-full flex flex-col gap-3 bg-white dark:bg-[#1D242A]"
@@ -82,6 +84,7 @@ export const CourseCard = ({ course }: { course: Course }) => {
         </div>
         <button
           type="button"
+          onClick={() => navigate(`/courses/detail/${course.id}`)}
           className="px-5 py-2 rounded-full bg-[#44BCFF] text-white text-[12px] font-medium hover:bg-[#2eaef5] transition"
         >
           Get Course

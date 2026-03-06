@@ -26,7 +26,9 @@ export const DashboardLayout = () => {
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
-  const pageTitle = PAGE_TITLES[pathname] ?? "Dashboard";
+  const pageTitle =
+    PAGE_TITLES[pathname] ??
+    (pathname.startsWith("/courses/detail/") ? "Course Details" : "Dashboard");
 
   return (
     <div className="h-screen overflow-hidden flex bg-[#F6F8F9] text-gray-900 dark:bg-[#0F161A] dark:text-slate-50">

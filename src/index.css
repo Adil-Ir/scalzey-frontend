@@ -7,6 +7,11 @@ body {
   font-family: "Sora", sans-serif;
 }
 
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
 .font-poppins {
   font-family: "Poppins", sans-serif;
 }
