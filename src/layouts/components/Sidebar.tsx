@@ -4,15 +4,16 @@ import {
   HiOutlineHome, HiOutlineViewGrid, HiOutlineTemplate,
   HiOutlineCalendar, HiOutlineSearch, HiOutlineRefresh,
   HiOutlineClipboardList, HiOutlineChatAlt2, HiOutlineSpeakerphone,
-  HiOutlineUserGroup, HiOutlineGlobeAlt,
+  HiOutlineGlobeAlt,
 } from "react-icons/hi";
+import { COMMUNITIES } from "../../pages/explore-community/data";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface NavItem {
   to: string;
   label: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   badge?: ReactNode;
 }
 
@@ -21,9 +22,25 @@ interface NavSection {
   items: NavItem[];
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
+// ─── Avatar stack badge for community items ───────────────────────────────────
 
-const NAV_SECTIONS: NavSection[] = [
+const CommunityBadge = ({ colors, members }: { colors: string[]; members: string }) => (
+  <div className="flex items-center gap-1 shrink-0">
+    <div className="flex -space-x-1">
+      {colors.slice(0, 3).map((c, i) => (
+        <span
+          key={i}
+          className={`inline-block h-4 w-4 rounded-full border border-white dark:border-[#0F161A] ${c}`}
+        />
+      ))}
+    </div>
+    <span className="text-[10px] text-slate-400 dark:text-slate-500">{members}</span>
+  </div>
+);
+
+// ─── Static nav sections ──────────────────────────────────────────────────────
+
+const STATIC_SECTIONS: NavSection[] = [
   {
     heading: "General",
     items: [
@@ -41,48 +58,36 @@ const NAV_SECTIONS: NavSection[] = [
       { to: "/courses/results",    label: "Results",  icon: <HiOutlineClipboardList size={18} /> },
     ],
   },
-  {
-    heading: "Community",
-    items: [
-      {
-        to: "/community/explore",
-        label: "Explore",
-        icon: <HiOutlineGlobeAlt size={18} />,
-        badge: <span className="text-[11px] text-slate-500">234+</span>,
-      },
-      { to: "/community/geki-learn",       label: "Geki Learn",      icon: <HiOutlineUserGroup size={18} /> },
-      { to: "/community/product-visuals",  label: "Product Visuals", icon: <HiOutlineUserGroup size={18} /> },
-      { to: "/community/dev-crown",        label: "Dev Crown",       icon: <HiOutlineUserGroup size={18} /> },
-    ],
-  },
-  {
-    heading: "Direct Messages (3)",
-    items: [
-      { to: "/messages/chats",            label: "Chats",          icon: <HiOutlineChatAlt2 size={18} /> },
-      {
-        to: "/messages/savannah-nguyen",
-        label: "Savannah Nguyen",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-[#FFFFFFBF] text-[10px] font-semibold">S</span>,
-      },
-      {
-        to: "/messages/jenny-wilson",
-        label: "Jenny Wilson",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-pink-600 text-[#FFFFFFBF] text-[10px] font-semibold">J</span>,
-      },
-      {
-        to: "/messages/guy-hawkins",
-        label: "Guy Hawkins",
-        icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-600 text-[#FFFFFFBF] text-[10px] font-semibold">G</span>,
-      },
-    ],
-  },
-  {
-    heading: "Update & Announcements",
-    items: [
-      { to: "/updates", label: "Updates", icon: <HiOutlineSpeakerphone size={18} /> },
-    ],
-  },
 ];
+
+const MESSAGES_SECTION: NavSection = {
+  heading: "Direct Messages (3)",
+  items: [
+    { to: "/messages/chats", label: "Chats", icon: <HiOutlineChatAlt2 size={18} /> },
+    {
+      to: "/messages/savannah-nguyen",
+      label: "Savannah Nguyen",
+      icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-white text-[10px] font-semibold">S</span>,
+    },
+    {
+      to: "/messages/jenny-wilson",
+      label: "Jenny Wilson",
+      icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-pink-600 text-white text-[10px] font-semibold">J</span>,
+    },
+    {
+      to: "/messages/guy-hawkins",
+      label: "Guy Hawkins",
+      icon: <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-600 text-white text-[10px] font-semibold">G</span>,
+    },
+  ],
+};
+
+const UPDATES_SECTION: NavSection = {
+  heading: "Update & Announcements",
+  items: [
+    { to: "/updates", label: "Updates", icon: <HiOutlineSpeakerphone size={18} /> },
+  ],
+};
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -112,15 +117,19 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
           <div className="h-9 w-9 rounded-full bg-sky-400/90 flex items-center justify-center text-slate-950 font-bold text-sm shrink-0">
             CO
           </div>
-            {!collapsed && (
-              <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">techy</span>
-            )}
+          {!collapsed && (
+            <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
+              techy
+            </span>
+          )}
         </div>
       </div>
 
       {/* Nav */}
       <div className="flex-1 space-y-6 overflow-y-auto overflow-x-hidden w-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {NAV_SECTIONS.map((section, i) => (
+
+        {/* Static sections: General + Courses */}
+        {STATIC_SECTIONS.map((section, i) => (
           <div key={section.heading}>
             {i > 0 && <hr className="border-gray-200 dark:border-[#2D3D46] mb-4" />}
             <section className="space-y-1">
@@ -133,21 +142,116 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  end={item.to === "/"}
                   title={item.label}
                   className={({ isActive }) => linkClass(isActive)}
                 >
                   <span className="shrink-0">{item.icon}</span>
-                  {!collapsed && (
-                    <span className="flex-1 flex items-center justify-between">
-                      {item.label}
-                      {item.badge}
-                    </span>
-                  )}
+                  {!collapsed && <span className="flex-1">{item.label}</span>}
                 </NavLink>
               ))}
             </section>
           </div>
         ))}
+
+        {/* Community section — dynamic */}
+        <div>
+          <hr className="border-gray-200 dark:border-[#2D3D46] mb-4" />
+          <section className="space-y-1">
+            {!collapsed && (
+              <p className="uppercase text-[10px] px-3 mb-2 text-gray-400 dark:text-slate-500">
+                Community
+              </p>
+            )}
+
+            {/* Explore link */}
+            <NavLink
+              to="/community/explore"
+              title="Explore"
+              className={({ isActive }) => linkClass(isActive)}
+            >
+              <span className="shrink-0"><HiOutlineGlobeAlt size={18} /></span>
+              {!collapsed && (
+                <span className="flex-1 flex items-center justify-between">
+                  Explore
+                  <span className="text-[11px] text-slate-500">234+</span>
+                </span>
+              )}
+            </NavLink>
+
+            {/* Dynamic community items — no icon, avatar stack badge */}
+            {COMMUNITIES.map((community) => (
+              <NavLink
+                key={community.id}
+                to={`/community/${community.slug}`}
+                title={community.name}
+                className={({ isActive }) => linkClass(isActive)}
+              >
+                {collapsed ? (
+                  /* Collapsed: show first avatar as icon */
+                  <span
+                    className={`shrink-0 inline-flex h-5 w-5 rounded-full items-center justify-center text-white text-[9px] font-bold ${community.avatarColors[0]}`}
+                  />
+                ) : (
+                  <span className="flex-1 flex items-center justify-between min-w-0">
+                    <span className="truncate">{community.name}</span>
+                    <CommunityBadge
+                      colors={community.avatarColors}
+                      members={community.members}
+                    />
+                  </span>
+                )}
+              </NavLink>
+            ))}
+          </section>
+        </div>
+
+        {/* Direct Messages */}
+        <div>
+          <hr className="border-gray-200 dark:border-[#2D3D46] mb-4" />
+          <section className="space-y-1">
+            {!collapsed && (
+              <p className="uppercase text-[10px] px-3 mb-2 text-gray-400 dark:text-slate-500">
+                {MESSAGES_SECTION.heading}
+              </p>
+            )}
+            {MESSAGES_SECTION.items.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                title={item.label}
+                className={({ isActive }) => linkClass(isActive)}
+              >
+                <span className="shrink-0">{item.icon}</span>
+                {!collapsed && <span className="flex-1">{item.label}</span>}
+              </NavLink>
+            ))}
+          </section>
+        </div>
+
+        {/* Updates */}
+        <div>
+          <hr className="border-gray-200 dark:border-[#2D3D46] mb-4" />
+          <section className="space-y-1">
+            {!collapsed && (
+              <p className="uppercase text-[10px] px-3 mb-2 text-gray-400 dark:text-slate-500">
+                {UPDATES_SECTION.heading}
+              </p>
+            )}
+            {UPDATES_SECTION.items.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                title={item.label}
+                className={({ isActive }) => linkClass(isActive)}
+              >
+                <span className="shrink-0">{item.icon}</span>
+                {!collapsed && <span className="flex-1">{item.label}</span>}
+              </NavLink>
+            ))}
+          </section>
+        </div>
+
       </div>
     </aside>
   );

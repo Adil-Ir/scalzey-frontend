@@ -11,7 +11,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/courses/explore":           "Explore Courses",
   "/courses/enrolled":          "Enrolled Courses",
   "/courses/results":           "Results",
-  "/community/explore":         "Community",
+  "/community/explore":         "Communities",
   "/community/geki-learn":      "Geki Learn",
   "/community/product-visuals": "Product Visuals",
   "/community/dev-crown":       "Dev Crown",
@@ -30,6 +30,7 @@ export const DashboardLayout = () => {
     PAGE_TITLES[pathname] ??
     (pathname.startsWith("/courses/detail/") ? "Course Details" :
     pathname.match(/^\/classroom\/\d+\/module\/\d+\/lesson\/\d+$/) ? "Course Details" :
+    pathname.startsWith("/community/") && pathname !== "/community/explore" ? "Community" :
     pathname.startsWith("/classroom/") ? "Classroom" :
     "Dashboard");
 
@@ -39,7 +40,7 @@ export const DashboardLayout = () => {
       <Sidebar collapsed={collapsed} />
 
       {/* Right column — fills remaining width, locked to viewport height */}
-      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+      <div id="dashboard-main" className="relative flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Topbar — always visible at top */}
         <Topbar
           pageTitle={pageTitle}
