@@ -1,5 +1,6 @@
 import { FiArrowUpRight, FiMoreVertical } from "react-icons/fi";
 import { MdOutlineGridView, MdOutlineMenuBook, MdOutlineQuiz, MdOutlineTableChart } from "react-icons/md";
+import { useNavigate, useParams } from "react-router-dom";
 import type { ClassroomCourse } from "../data";
 
 const MODULE_BADGE_COLORS = [
@@ -11,7 +12,11 @@ const MODULE_BADGE_COLORS = [
   "bg-gray-600",
 ];
 
-export const ClassroomCourseContent = ({ course }: { course: ClassroomCourse }) => (
+export const ClassroomCourseContent = ({ course }: { course: ClassroomCourse }) => {
+  const navigate = useNavigate();
+  const { id: courseId } = useParams<{ id: string }>();
+
+  return (
   <div
     className="bg-white dark:bg-[#1D242A] flex flex-col"
     style={{ borderRadius: "26.53px", border: "1px solid #2D3D46" }}
@@ -57,25 +62,30 @@ export const ClassroomCourseContent = ({ course }: { course: ClassroomCourse }) 
             </div>
           </div>
 
-          {/* Actions — only show on first module */}
-          {idx === 0 && (
-            <div className="flex items-center gap-2 shrink-0">
-              <button
-                type="button"
-                className="h-8 w-8 rounded-full bg-[#44BCFF] flex items-center justify-center hover:bg-[#2eaef5] transition"
-              >
-                <FiArrowUpRight size={15} className="text-white" />
-              </button>
-              <button
-                type="button"
-                className="h-8 w-8 rounded-full flex items-center justify-center text-gray-400 dark:text-slate-500 hover:bg-gray-100 dark:hover:bg-white/10 transition"
-              >
-                <FiMoreVertical size={15} />
-              </button>
-            </div>
-          )}
+          {/* Open lesson button — on every module row */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() =>
+                navigate(
+                  `/classroom/${courseId}/module/${mod.id}/lesson/${mod.lessons[0]?.id ?? 1}`
+                )
+              }
+              className="h-8 w-8 rounded-full bg-[#44BCFF] flex items-center justify-center hover:bg-[#2eaef5] transition"
+              title="Open lessons"
+            >
+              <FiArrowUpRight size={15} className="text-white" />
+            </button>
+            <button
+              type="button"
+              className="h-8 w-8 rounded-full flex items-center justify-center text-gray-400 dark:text-slate-500 hover:bg-gray-100 dark:hover:bg-white/10 transition"
+            >
+              <FiMoreVertical size={15} />
+            </button>
+          </div>
         </div>
       ))}
     </div>
   </div>
-);
+  );
+};

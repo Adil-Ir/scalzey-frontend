@@ -29,6 +29,7 @@ export const DashboardLayout = () => {
   const pageTitle =
     PAGE_TITLES[pathname] ??
     (pathname.startsWith("/courses/detail/") ? "Course Details" :
+    pathname.match(/^\/classroom\/\d+\/module\/\d+\/lesson\/\d+$/) ? "Course Details" :
     pathname.startsWith("/classroom/") ? "Classroom" :
     "Dashboard");
 

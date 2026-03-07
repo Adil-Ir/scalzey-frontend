@@ -17,6 +17,7 @@ import { EnrolledCoursesPage } from "./pages/enrolled-course";
 import { CoursesResultsPage } from "./pages/results";
 import { CourseDetailPage } from "./pages/course-detail";
 import { ClassroomPage } from "./pages/classroom";
+import { LessonDetailsPage } from "./pages/lesson-details";
 import { CommunityExplorePage } from "./pages/dashboard/CommunityExplorePage";
 import { CommunityGekiLearnPage } from "./pages/dashboard/CommunityGekiLearnPage";
 import { CommunityProductVisualsPage } from "./pages/dashboard/CommunityProductVisualsPage";
@@ -53,6 +54,10 @@ const App = () => {
           <Route path="/courses/results" element={<CoursesResultsPage />} />
           <Route path="/courses/detail/:id" element={<CourseDetailPage />} />
           <Route path="/classroom/:id" element={<ClassroomPage />} />
+          <Route
+            path="/classroom/:courseId/module/:moduleId/lesson/:lessonId"
+            element={<LessonDetailsPage />}
+          />
 
           <Route path="/community/explore" element={<CommunityExplorePage />} />
           <Route
