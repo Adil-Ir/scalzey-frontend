@@ -58,6 +58,33 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
       { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
     ],
   },
+  "ux-masters": {
+    slug: "ux-masters",
+    name: "#UX_Masters",
+    displayName: "UX Masters",
+    avatarColors: ["bg-teal-500", "bg-cyan-400", "bg-indigo-400"],
+    sections: [
+      { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
+    ],
+  },
+  "java-guild": {
+    slug: "java-guild",
+    name: "#Java_Guild",
+    displayName: "Java Guild",
+    avatarColors: ["bg-amber-500", "bg-rose-400", "bg-violet-400"],
+    sections: [
+      { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
+    ],
+  },
+  "agile-network": {
+    slug: "agile-network",
+    name: "#Agile_Network",
+    displayName: "Agile Network",
+    avatarColors: ["bg-emerald-500", "bg-lime-400", "bg-sky-500"],
+    sections: [
+      { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
+    ],
+  },
 };
 
 export const formatDateLabel = (date: string) => {

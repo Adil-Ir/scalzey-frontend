@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { FiSend, FiPlus, FiSmile, FiPaperclip } from "react-icons/fi";
+import { FiSend, FiPlus, FiSmile, FiPaperclip, FiLink } from "react-icons/fi";
 import { HiOutlineUserGroup } from "react-icons/hi";
 
 interface ChannelMessageInputProps {
@@ -59,6 +59,11 @@ export const ChannelMessageInput = ({
     e.target.value = "";
   };
 
+  const handleLinkClick = () => {
+    const url = window.prompt("Enter link URL:");
+    if (url?.trim()) setText((prev) => (prev ? `${prev} ${url}` : url));
+  };
+
   return (
     <div className="shrink-0 px-6 py-4 border-t border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]">
       <div className="flex items-center gap-2 pl-4 rounded-full bg-gray-100 dark:bg-[#1D242A]">
@@ -103,9 +108,20 @@ export const ChannelMessageInput = ({
 
         <button
           type="button"
+          id="message-input-link"
+          onClick={handleLinkClick}
+          className="h-8 w-8 rounded-lg flex items-center justify-center text-gray-500 dark:text-slate-400 hover:text-[#44BCFF] transition"
+          aria-label="Add link"
+        >
+          <FiLink size={18} />
+        </button>
+
+        <button
+          type="button"
           id="message-input-attach-file"
           onClick={handleAttachClick}
           className="h-8 w-8 rounded-lg flex items-center justify-center text-gray-500 dark:text-slate-400 hover:text-[#44BCFF] transition"
+          aria-label="Attach file"
         >
           <FiPaperclip size={18} />
         </button>

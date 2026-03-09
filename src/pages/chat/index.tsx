@@ -39,9 +39,9 @@ export const ChatPage = () => {
       className="flex -m-4 md:-m-6 xl:-m-10 overflow-hidden"
       style={{ height: "calc(100vh - 64px)" }}
     >
-      {/* Contacts sidebar */}
-      <div className="w-[280px] shrink-0 flex flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]">
-        <div className="px-4 py-4 border-b border-gray-200 dark:border-[#2D3D46]">
+      {/* Contacts sidebar — wider, no border under heading */}
+      <div className="w-[320px] shrink-0 flex flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]">
+        <div className="px-4 py-4">
           <h2 className="text-[14px] font-semibold text-gray-900 dark:text-white">Chat</h2>
         </div>
         <div className="flex-1 overflow-y-auto">

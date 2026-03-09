@@ -70,7 +70,7 @@ export const TopCommunitySwiper = ({
                 }}
                 className="text-[12px] px-3.5 py-1.5 rounded-full bg-white text-[#0F161A] hover:bg-white/80 transition font-medium shadow-sm"
               >
-                Join Today
+                {community.isPrivate ? "Request Join" : "Join Today"}
               </button>
             </div>
 

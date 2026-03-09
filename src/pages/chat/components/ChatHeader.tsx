@@ -1,3 +1,4 @@
+import { FiSearch } from "react-icons/fi";
 import type { Contact } from "../data";
 import { Avatar } from "./ContactList";
 
@@ -17,6 +18,7 @@ export const ChatHeader = ({ contact, searchQuery, onSearchChange }: ChatHeaderP
       </div>
     </div>
     <div className="flex items-center gap-2 rounded-full bg-gray-100 dark:bg-[#1D242A] px-4 py-2 w-56">
+      <FiSearch size={14} className="text-gray-400 dark:text-slate-500 shrink-0" />
       <input
         type="text"
         value={searchQuery}

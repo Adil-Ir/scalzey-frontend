@@ -25,7 +25,18 @@ export const MessageFeed = ({ messages, searchQuery }: MessageFeedProps) => {
                 : "bg-gray-100 dark:bg-[#1D242A] text-gray-800 dark:text-slate-200 rounded-bl-md border border-gray-200 dark:border-[#2D3D46]"
             }`}
           >
-            {m.text}
+            {m.text.startsWith("http") ? (
+              <a
+                href={m.text}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#44BCFF] hover:underline break-all"
+              >
+                {m.text}
+              </a>
+            ) : (
+              m.text
+            )}
           </div>
         </div>
       ))}
