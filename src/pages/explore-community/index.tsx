@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { TopCommunitySwiper } from "./components/TopCommunitySwiper";
 import { CommunityCard } from "./components/CommunityCard";
@@ -7,6 +8,7 @@ import { TOP_COMMUNITIES, EXPLORE_COMMUNITIES } from "./data";
 import type { Community } from "./data";
 
 export const ExploreCommunityPage = () => {
+  const navigate = useNavigate();
   const [joinTarget, setJoinTarget] = useState<Community | null>(null);
   const [query, setQuery] = useState("");
 
@@ -14,9 +16,16 @@ export const ExploreCommunityPage = () => {
     c.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  // TODO: replace with API call — POST /communities/:id/join-request
-  const handleJoin = (community: Community) => {
-    console.log("Join request for:", community.name);
+  const handleJoinClick = (community: Community) => {
+    if (community.isPrivate) {
+      setJoinTarget(community);
+    } else {
+      navigate(`/community/${community.slug}`);
+    }
+  };
+
+  const handleJoinRequest = (community: Community) => {
+    console.log("Join request for private community:", community.name);
   };
 
   return (
@@ -46,7 +55,7 @@ export const ExploreCommunityPage = () => {
 
         <TopCommunitySwiper
           communities={TOP_COMMUNITIES}
-          onJoinClick={setJoinTarget}
+          onJoinClick={handleJoinClick}
         />
       </div>
 
@@ -62,7 +71,7 @@ export const ExploreCommunityPage = () => {
               <CommunityCard
                 key={community.id}
                 community={community}
-                onJoinClick={setJoinTarget}
+                onJoinClick={handleJoinClick}
               />
             ))}
           </div>
@@ -78,7 +87,7 @@ export const ExploreCommunityPage = () => {
         <JoinModal
           community={joinTarget}
           onClose={() => setJoinTarget(null)}
-          onJoin={handleJoin}
+          onJoin={handleJoinRequest}
         />
       )}
     </div>

@@ -18,14 +18,9 @@ import { CourseDetailPage } from "./pages/course-detail";
 import { ClassroomPage } from "./pages/classroom";
 import { LessonDetailsPage } from "./pages/lesson-details";
 import { ExploreCommunityPage } from "./pages/explore-community";
-import { MessagesChatsPage } from "./pages/dashboard/MessagesChatsPage";
-import {
-  SavannahNguyenPage,
-  JennyWilsonPage,
-  GuyHawkinsPage,
-} from "./pages/dashboard/MessageDetailPage";
+import { ChatPage } from "./pages/chat";
+import { CommunityChannelPage } from "./pages/community-channel";
 import { UpdatesPage } from "./pages/dashboard/UpdatesPage";
-import { DashboardSection } from "./components/dashboard/DashboardSection";
 
 const App = () => {
   return (
@@ -58,20 +53,10 @@ const App = () => {
 
             {/* Community — explore + dynamic :slug */}
             <Route path="/community/explore" element={<ExploreCommunityPage />} />
-            <Route
-              path="/community/:slug"
-              element={
-                <DashboardSection
-                  title="Community"
-                  subtitle="Community detail page — API integration coming soon."
-                />
-              }
-            />
+            <Route path="/community/:slug" element={<CommunityChannelPage />} />
 
-            <Route path="/messages/chats" element={<MessagesChatsPage />} />
-            <Route path="/messages/savannah-nguyen" element={<SavannahNguyenPage />} />
-            <Route path="/messages/jenny-wilson" element={<JennyWilsonPage />} />
-            <Route path="/messages/guy-hawkins" element={<GuyHawkinsPage />} />
+            <Route path="/messages/chats" element={<ChatPage />} />
+            <Route path="/messages/:slug" element={<ChatPage />} />
 
             <Route path="/updates" element={<UpdatesPage />} />
           </Route>

@@ -44,7 +44,7 @@ export const CommunityCard = ({ community, onJoinClick }: CommunityCardProps) =>
           }}
           className="text-[12px] px-3.5 py-1.5 rounded-full bg-white dark:bg-white/10 text-[#0F161A] dark:text-white hover:bg-gray-50 dark:hover:bg-white/20 transition font-medium shadow-sm"
         >
-          Join Today
+          {community.isPrivate ? "Request Join" : "Join Today"}
         </button>
       </div>
 
