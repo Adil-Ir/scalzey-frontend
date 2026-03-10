@@ -9,6 +9,7 @@ export interface EnrolledCommunity {
 
 export interface UserProfile {
   name: string;
+  username?: string; /** For public URL: /profile/:username */
   email: string;
   avatarUrl: string | null;
   phone?: string;
@@ -20,6 +21,7 @@ export interface UserProfile {
   /** Enrolled communities — use slug for redirect; API returns { id, name, slug }[] */
   enrolledCommunities?: (string | EnrolledCommunity)[];
   interests?: string[];
+  /** When true, others can view profile at /profile/:username. Owner controls via toggle. */
   isPublicProfile?: boolean;
 }
 
@@ -30,6 +32,7 @@ interface UserProfileContextValue {
 
 const defaultProfile: UserProfile = {
   name: "Setalia Green",
+  username: "setalia-green",
   email: "mstellag@gmail.com",
   avatarUrl: null,
   phone: "+923407712693",

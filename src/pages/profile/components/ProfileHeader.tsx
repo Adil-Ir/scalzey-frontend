@@ -4,16 +4,16 @@ import { FaHandPaper } from "react-icons/fa";
 import { useUserProfile } from "../../../context/UserProfileContext";
 
 interface ProfileHeaderProps {
-  isPublicView: boolean;
-  onPublicViewChange: (value: boolean) => void;
+  isPublicProfile: boolean;
+  onVisibilityChange: (value: boolean) => void;
   onEditClick: () => void;
   progress: number;
   isOwnProfile: boolean;
 }
 
 export const ProfileHeader = ({
-  isPublicView,
-  onPublicViewChange,
+  isPublicProfile,
+  onVisibilityChange,
   onEditClick,
   progress,
   isOwnProfile,
@@ -42,27 +42,27 @@ export const ProfileHeader = ({
           </div>
         </div>
 
-        {/* Right: Public View, Edit, Progress */}
+        {/* Right: Make profile public toggle, Edit, Progress — owner only */}
         {isOwnProfile && (
           <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
             <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full border border-gray-200 dark:border-[#2D3D46] bg-transparent shrink-0">
               <span className="text-[13px] text-gray-600 dark:text-slate-400 whitespace-nowrap">
-                Public View
+                Make profile public
               </span>
               <button
                 type="button"
                 role="switch"
-                aria-checked={isPublicView}
-                onClick={() => onPublicViewChange(!isPublicView)}
+                aria-checked={isPublicProfile}
+                onClick={() => onVisibilityChange(!isPublicProfile)}
                 className={`relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors ${
-                  isPublicView
+                  isPublicProfile
                     ? "bg-[#44BCFF]"
                     : "bg-gray-300 dark:bg-[#2D3D46]"
                 }`}
               >
                 <span
                   className={`absolute top-1 left-1 h-4 w-4 rounded-full bg-white shadow transition-transform ${
-                    isPublicView ? "translate-x-5" : "translate-x-0"
+                    isPublicProfile ? "translate-x-5" : "translate-x-0"
                   }`}
                 />
               </button>

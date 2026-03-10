@@ -4,27 +4,51 @@ import { ProfilePublicView } from "./components/ProfilePublicView";
 import { useUserProfile } from "../../context/UserProfileContext";
 
 /**
- * Public view of a user's profile — as seen by other users.
- * Read-only, no toggle, no edit. Uses mock data for now (TODO: fetch by username).
+ * Public view of a user's profile at /profile/:username
+ * - When YOU visit your own URL (/profile/your-username): preview what others see + "Edit profile" link
+ * - When OTHERS visit: they see public profile only if isPublicProfile, else "This profile is private"
+ * Never shows Edit, Progress, or visibility toggle.
  */
 export const PublicProfilePage = () => {
-  useParams<{ username: string }>(); // TODO: fetch profile by username from API
+  const { username } = useParams<{ username: string }>();
   const { profile } = useUserProfile();
 
-  // TODO: Fetch profile by username from API
-  // For now, show current user's public data as example for another user's profile
+  const currentUsername = profile.username ?? profile.name.toLowerCase().replace(/\s+/g, "-");
+  const isOwnProfile = username === currentUsername;
+
+  // TODO: Fetch profile by username from API when viewing another user
   const displayProfile = profile;
+  const isPublic = displayProfile.isPublicProfile ?? false;
+
+  // Another user's profile that is private
+  if (!isOwnProfile && !isPublic) {
+    return (
+      <div className="rounded-2xl bg-white dark:bg-[#1D242A]p-4 sm:p-6 md:p-8">
+        <h1 className="text-[18px] sm:text-[20px] md:text-[22px] font-semibold text-gray-900 dark:text-white mb-6">
+          Profile
+        </h1>
+        <div className="py-12 text-center">
+          <p className="text-[15px] text-gray-500 dark:text-slate-400">
+            This profile is private.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-2xl bg-white dark:bg-[#1D242A] border border-gray-200 dark:border-[#2D3D46] p-4 sm:p-6 md:p-8">
-      <h1 className="text-[18px] sm:text-[20px] md:text-[22px] font-semibold text-gray-900 dark:text-white mb-6 md:mb-8">
-        Profile
-      </h1>
+      <div className="flex items-center justify-between mb-6 md:mb-8">
+        <h1 className="text-[18px] sm:text-[20px] md:text-[22px] font-semibold text-gray-900 dark:text-white">
+          Profile
+        </h1>
+      
+      </div>
 
       {/* Two-column: left = image 15%, right = data 85% */}
       <div className="flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-4">
         {/* Left side — Image only, 15% width */}
-        <div className="shrink-0 w-full lg:w-[15%] flex justify-center lg:justify-start">
+        <div className="shrink-0 w-25 h-25 flex justify-center lg:justify-start">
           <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden">
             {displayProfile.avatarUrl ? (
               <img
@@ -33,7 +57,7 @@ export const PublicProfilePage = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-base sm:text-lg font-semibold">
+              <div className="w-full h-full bg-linear-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-base sm:text-lg font-semibold">
                 {displayProfile.name ? displayProfile.name[0].toUpperCase() : "U"}
               </div>
             )}

@@ -152,7 +152,7 @@ export const ChannelMessageInput = ({
       )}
 
       <div
-        className={`flex items-end gap-2 pl-4 pr-2 py-3 bg-gray-100 dark:bg-[#1D242A] min-h-[52px] transition-[border-radius] duration-200 ${
+        className={`flex items-end gap-2 pl-4 pr-2 py-3 bg-gray-100 dark:bg-[#1D242A] min-h-13 transition-[border-radius] duration-200 ${
           isMultiLine ? "rounded-xl" : "rounded-full"
         }`}
       >
@@ -171,7 +171,7 @@ export const ChannelMessageInput = ({
           onKeyDown={handleKeyDown}
           placeholder="message #general"
           rows={1}
-          className="flex-1 bg-transparent text-[13px] text-gray-900 dark:text-slate-200 placeholder-gray-400 dark:placeholder-slate-500 outline-none border-none min-w-0 resize-none py-2 min-h-[24px] max-h-[160px] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex-1 bg-transparent text-[13px] text-gray-900 dark:text-slate-200 placeholder-gray-400 dark:placeholder-slate-500 outline-none border-none min-w-0 resize-none py-2 min-h-6 max-h-40 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         />
 
         <div className="flex items-center gap-1 shrink-0 pb-0.5">
