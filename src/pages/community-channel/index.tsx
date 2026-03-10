@@ -16,7 +16,7 @@ export const CommunityChannelPage = () => {
   const config = slug ? COMMUNITY_CHANNELS[slug] : null;
 
   const [selectedChannelId, setSelectedChannelId] = useState("general");
-  const [searchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [messages, setMessages] = useState<ChannelMessage[]>(getInitialMessages);
   const [showCreatePoll, setShowCreatePoll] = useState(false);
   const [showAddPeople, setShowAddPeople] = useState(false);
@@ -35,13 +35,22 @@ export const CommunityChannelPage = () => {
     );
   }
 
-  const handleSend = (text: string) => {
+  const handleSend = (text: string, files?: File[]) => {
+    const imageUrls = files
+      ?.filter((f) => f.type.startsWith("image/"))
+      .map((f) => URL.createObjectURL(f));
+    const allUrls = imageUrls ?? [];
+    const hasContent = text.trim() || allUrls.length > 0;
+    if (!hasContent) return;
+
     const newMsg: ChannelMessage = {
       id: `msg-${Date.now()}`,
       type: "text",
       senderName: "Annette Black",
       senderColor: "bg-pink-600",
-      text,
+      text: text.trim() || undefined,
+      imageUrl: allUrls[0],
+      imageUrls: allUrls.length > 1 ? allUrls : undefined,
       time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
       date: new Date().toISOString().split("T")[0],
     };
@@ -72,19 +81,6 @@ export const CommunityChannelPage = () => {
     setMessages((prev) => [...prev, pollMsg]);
   };
 
-  const handleAttachFiles = (files: File[]) => {
-    if (files.length === 0) return;
-    const newMsg: ChannelMessage = {
-      id: `msg-${Date.now()}`,
-      type: "text",
-      senderName: "Annette Black",
-      senderColor: "bg-pink-600",
-      text: `📎 ${files.map((f) => f.name).join(", ")}`,
-      time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
-      date: new Date().toISOString().split("T")[0],
-    };
-    setMessages((prev) => [...prev, newMsg]);
-  };
 
   const handleVote = (messageId: string, optionIndex: number) => {
     setMessages((prev) =>
@@ -103,22 +99,49 @@ export const CommunityChannelPage = () => {
     );
   };
 
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+  const handleSelectChannel = (id: string) => {
+    setSelectedChannelId(id);
+    setMobileSidebarOpen(false);
+  };
+
   return (
     <>
       <div
         className="flex -m-4 md:-m-6 xl:-m-10 overflow-hidden"
         style={{ height: "calc(100vh - 64px)" }}
       >
-        <div className="w-[240px] shrink-0 flex flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]">
-          <ChannelSidebar
-            config={config}
-            selectedChannelId={selectedChannelId}
-            onSelectChannel={setSelectedChannelId}
-          />
-        </div>
+        {/* Channel sidebar — overlay on mobile, fixed on tablet+ */}
+        <>
+          {mobileSidebarOpen && (
+            <div
+              className="fixed inset-0 z-40 md:hidden bg-black/50"
+              onClick={() => setMobileSidebarOpen(false)}
+              aria-hidden="true"
+            />
+          )}
+          <div
+            className={`${
+              mobileSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+            } absolute md:relative inset-y-0 left-0 z-50 md:z-auto w-[260px] md:w-[200px] lg:w-[240px] shrink-0 flex flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A] transition-transform duration-200 ease-out`}
+          >
+            <ChannelSidebar
+              config={config}
+              selectedChannelId={selectedChannelId}
+              onSelectChannel={handleSelectChannel}
+              onClose={() => setMobileSidebarOpen(false)}
+            />
+          </div>
+        </>
 
         <div className="flex-1 flex flex-col min-w-0 bg-white dark:bg-[#0F161A] relative">
-          <ChannelHeader config={config} />
+          <ChannelHeader
+            config={config}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            onChannelsClick={() => setMobileSidebarOpen(true)}
+          />
           <ChannelMessageFeed
             messages={messages}
             searchQuery={searchQuery}
@@ -128,7 +151,6 @@ export const CommunityChannelPage = () => {
           <ChannelMessageInput
             onSend={handleSend}
             onCreatePollClick={() => setShowCreatePoll(true)}
-            onAttachFiles={handleAttachFiles}
           />
 
           {showAddPeople && (

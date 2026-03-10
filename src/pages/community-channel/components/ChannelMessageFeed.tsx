@@ -55,7 +55,7 @@ export const ChannelMessageFeed = ({
   const seenDates = new Set<string>();
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-4 space-y-1 bg-white dark:bg-[#0F161A]">
+    <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 space-y-1 bg-white dark:bg-[#0F161A]">
       {grouped.map(({ date, items }) => (
         <div key={date}>
           {!seenDates.has(date) && (
@@ -95,25 +95,49 @@ export const ChannelMessageFeed = ({
                   )}
                 </div>
 
-                {msg.type === "text" && msg.text && (
-                  <div
-                    className={`inline-block px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed max-w-[75%] ${
-                      msg.senderName === "Annette Black"
-                        ? "bg-[#44BCFF] text-white rounded-br-md"
-                        : "bg-gray-100 dark:bg-[#1D242A] text-gray-800 dark:text-slate-200 rounded-bl-md border border-gray-200 dark:border-[#2D3D46]"
-                    }`}
-                  >
-                    {msg.text.startsWith("http") ? (
-                      <a
-                        href={msg.text}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#44BCFF] hover:underline break-all"
+                {msg.type === "text" && (
+                  <div className="space-y-2">
+                    {(msg.imageUrl || (msg.imageUrls && msg.imageUrls.length > 0)) && (
+                      <div className="flex flex-wrap gap-1.5 max-w-full sm:max-w-[400px]">
+                        {msg.imageUrls && msg.imageUrls.length > 0 ? (
+                          msg.imageUrls.map((url, i) => (
+                            <img
+                              key={i}
+                              src={url}
+                              alt=""
+                              className="max-h-64 rounded-lg object-cover border border-gray-200 dark:border-[#2D3D46]"
+                            />
+                          ))
+                        ) : msg.imageUrl ? (
+                          <img
+                            src={msg.imageUrl}
+                            alt=""
+                            className="max-h-64 rounded-lg object-cover border border-gray-200 dark:border-[#2D3D46]"
+                          />
+                        ) : null}
+                      </div>
+                    )}
+                    {msg.text && (
+                      <div
+                        className={`inline-block px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed max-w-[85%] sm:max-w-[75%] ${
+                          msg.senderName === "Annette Black"
+                            ? "bg-[#44BCFF] text-white rounded-br-md"
+                            : "bg-gray-100 dark:bg-[#1D242A] text-gray-800 dark:text-slate-200 rounded-bl-md border border-gray-200 dark:border-[#2D3D46]"
+                        }`}
                       >
-                        {msg.text}
-                      </a>
-                    ) : (
-                      highlightHashtags(msg.text)
+                        {msg.text.startsWith("http") ? (
+                          <a
+                            href={msg.text}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#44BCFF] hover:underline break-all"
+                          >
+                            {msg.text}
+                          </a>
+                        ) : (
+                          highlightHashtags(msg.text)
+                        )}
+                      </div>
                     )}
                   </div>
                 )}

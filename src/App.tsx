@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import { UserProfileProvider } from "./context/UserProfileContext";
 import { AuthLayout } from "./layouts/AuthLayout";
 import { DashboardLayout } from "./layouts/DashboardLayout";
 import { LoginPage } from "./pages/login";
@@ -21,10 +22,14 @@ import { ExploreCommunityPage } from "./pages/explore-community";
 import { ChatPage } from "./pages/chat";
 import { CommunityChannelPage } from "./pages/community-channel";
 import { UpdatesPage } from "./pages/dashboard/UpdatesPage";
+import { EditOnboardingProfilePage } from "./pages/edit-onboarding-profile";
+import { ProfilePage } from "./pages/profile";
+import { PublicProfilePage } from "./pages/profile/PublicProfilePage";
 
 const App = () => {
   return (
     <ThemeProvider>
+      <UserProfileProvider>
       <BrowserRouter>
         <Routes>
           <Route element={<AuthLayout />}>
@@ -59,11 +64,15 @@ const App = () => {
             <Route path="/messages/:slug" element={<ChatPage />} />
 
             <Route path="/updates" element={<UpdatesPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/:username" element={<PublicProfilePage />} />
+            <Route path="/edit-onboarding-profile" element={<EditOnboardingProfilePage />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
+      </UserProfileProvider>
     </ThemeProvider>
   );
 };

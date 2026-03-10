@@ -14,6 +14,7 @@ export interface ChannelMessage {
   date: string;
   text?: string;
   imageUrl?: string;
+  imageUrls?: string[];
   poll?: {
     question: string;
     options: { label: string; votes: number; percent: number }[];

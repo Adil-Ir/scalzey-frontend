@@ -1,19 +1,32 @@
+import { FiX } from "react-icons/fi";
 import type { CommunityChannelConfig } from "../data";
 
 interface ChannelSidebarProps {
   config: CommunityChannelConfig;
   selectedChannelId: string;
   onSelectChannel: (id: string) => void;
+  onClose?: () => void;
 }
 
 export const ChannelSidebar = ({
   config,
   selectedChannelId,
   onSelectChannel,
+  onClose,
 }: ChannelSidebarProps) => (
   <div className="flex flex-col h-full">
-    <div className="px-4 py-4 shrink-0">
+    <div className="px-4 py-4 shrink-0 flex items-center justify-between">
       <h2 className="text-[14px] font-semibold text-gray-900 dark:text-white">Channels</h2>
+      {onClose && (
+        <button
+          type="button"
+          onClick={onClose}
+          className="md:hidden h-8 w-8 flex items-center justify-center rounded-lg text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/10"
+          aria-label="Close channels"
+        >
+          <FiX size={18} />
+        </button>
+      )}
     </div>
     <div className="flex-1 overflow-y-auto py-4">
       {config.sections.map((section) => (

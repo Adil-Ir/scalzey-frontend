@@ -20,6 +20,9 @@ const PAGE_TITLES: Record<string, string> = {
   "/messages/jenny-wilson":        "Jenny Wilson",
   "/messages/guy-hawkins":         "Guy Hawkins",
   "/updates":                      "Updates",
+  "/profile":                     "Profile",
+  "/profile/:username":           "Profile",
+  "/edit-onboarding-profile":     "Profile Setup",
 };
 
 export const DashboardLayout = () => {
@@ -28,7 +31,8 @@ export const DashboardLayout = () => {
 
   const pageTitle =
     PAGE_TITLES[pathname] ??
-    (pathname.startsWith("/courses/detail/") ? "Course Details" :
+    (pathname.startsWith("/profile/") && pathname !== "/profile" ? "Profile" :
+    pathname.startsWith("/courses/detail/") ? "Course Details" :
     pathname.match(/^\/classroom\/\d+\/module\/\d+\/lesson\/\d+$/) ? "Course Details" :
     pathname.startsWith("/community/") && pathname !== "/community/explore" ? "Community" :
     pathname.startsWith("/classroom/") ? "Classroom" :

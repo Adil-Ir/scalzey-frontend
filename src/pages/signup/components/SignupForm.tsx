@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -35,6 +35,7 @@ const schema: yup.ObjectSchema<SignupFormValues> = yup.object({
 
 export const SignupForm = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -48,6 +49,7 @@ export const SignupForm = () => {
 
   const onSubmit = (data: SignupFormValues) => {
     console.log("Signup data", data);
+    navigate("/edit-onboarding-profile");
   };
 
   const baseFieldClasses =

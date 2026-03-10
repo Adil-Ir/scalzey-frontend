@@ -1,11 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FiBell, FiMessageSquare, FiChevronDown,
-  FiUser, FiHelpCircle, FiLogOut, FiMenu,
-  FiSun, FiMoon,
+  FiBell, FiChevronDown, FiUser, FiHelpCircle, FiLogOut, FiMenu,
 } from "react-icons/fi";
-import { useTheme } from "../../context/ThemeContext";
+import { useUserProfile } from "../../context/UserProfileContext";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -25,7 +23,7 @@ interface TopbarProps {
 
 export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { profile } = useUserProfile();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -43,7 +41,7 @@ export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
     {
       label: "Profile",
       icon: <FiUser size={14} />,
-      onClick: () => setDropdownOpen(false),
+      onClick: () => { setDropdownOpen(false); navigate("/profile"); },
     },
     {
       label: "Help Center",
@@ -57,11 +55,6 @@ export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
       onClick: () => { setDropdownOpen(false); navigate("/login"); },
     },
   ];
-
-  const iconBtn =
-    "inline-flex h-9 w-9 items-center justify-center rounded-full transition " +
-    "bg-gray-100 text-gray-500 hover:text-gray-900 " +
-    "dark:bg-[#1A252B] dark:text-slate-300 dark:hover:text-white";
 
   return (
     <header className="h-16 border-b flex items-center justify-between px-4 md:px-6 shrink-0 border-gray-200 bg-white dark:border-[#2D3D46] dark:bg-[#0F161A]">
@@ -81,65 +74,63 @@ export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
         </span>
       </div>
 
-      {/* Right */}
-      <div className="flex items-center gap-2">
-
-        {/* Dark / Light toggle */}
+      {/* Right — Notification badge, Bell, User dropdown (matches design) */}
+      <div className="flex items-center gap-3 md:gap-4">
+        {/* Notification badge — red circle with count */}
         <button
           type="button"
-          onClick={toggleTheme}
-          title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          className={iconBtn}
+          title="Notifications"
+          className="relative inline-flex h-9 w-9 items-center justify-center rounded-full transition bg-transparent hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
         >
-          {theme === "dark" ? <FiSun size={17} /> : <FiMoon size={17} />}
+          <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-semibold text-white ring-2 ring-white dark:ring-[#0F161A]">
+            1
+          </span>
+          <FiBell size={18} />
         </button>
 
-        {/* Chat with red badge */}
-        <button type="button" className={`relative ${iconBtn}`}>
-          <FiMessageSquare size={17} />
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 ring-1 ring-white dark:ring-[#0F161A]" />
-        </button>
-
-        {/* Bell */}
-        <button type="button" className={iconBtn}>
-          <FiBell size={17} />
-        </button>
-
-        {/* User profile + dropdown */}
+        {/* User profile + dropdown trigger */}
         <div className="relative" ref={dropdownRef}>
           <button
             type="button"
             onClick={() => setDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2.5 rounded-full pl-1 pr-3 py-1 transition hover:bg-gray-100 dark:hover:bg-slate-800"
+            className="flex items-center gap-3 rounded-lg pl-1 pr-2 py-1.5 transition hover:bg-gray-100 dark:hover:bg-white/5"
           >
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-xs font-semibold shrink-0">
-              SG
-            </div>
-            <div className="hidden md:flex flex-col items-start leading-tight">
-              <span className="text-[13px] font-medium text-gray-900 dark:text-white">
-                Setalia Green
+            {profile.avatarUrl ? (
+              <img
+                src={profile.avatarUrl}
+                alt="Profile"
+                className="h-9 w-9 rounded-full object-cover shrink-0"
+              />
+            ) : (
+              <div className="h-9 w-9 rounded-full bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white text-sm font-semibold shrink-0">
+                {profile.name ? profile.name.slice(0, 2).toUpperCase() : "U"}
+              </div>
+            )}
+            <div className="hidden sm:flex flex-col items-start text-left leading-tight min-w-0">
+              <span className="text-[13px] font-medium text-gray-900 dark:text-white truncate max-w-[140px]">
+                {profile.name}
               </span>
-              <span className="text-[11px] text-gray-400 dark:text-slate-400">
-                mstellag@gmail.com
+              <span className="text-[11px] text-gray-500 dark:text-slate-400 truncate max-w-[140px]">
+                {profile.email}
               </span>
             </div>
             <FiChevronDown
-              size={14}
-              className={`text-gray-400 dark:text-slate-400 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
+              size={16}
+              className={`shrink-0 text-gray-500 dark:text-slate-400 transition-transform ${dropdownOpen ? "rotate-180" : ""}`}
             />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute right-0 top-full mt-2 w-48 rounded-xl shadow-xl py-1 z-50 border bg-white border-gray-200 dark:bg-[#0F161A] dark:border-[#2D3D46]">
+            <div className="absolute right-0 top-full mt-2 w-52 rounded-xl shadow-xl py-1.5 z-50 border bg-white dark:bg-[#1D242A] border-gray-200 dark:border-[#2D3D46]">
               {dropdownItems.map((item) => (
                 <div key={item.label}>
                   {item.danger && (
-                    <hr className="border-gray-200 dark:border-slate-700 my-1" />
+                    <hr className="border-gray-200 dark:border-[#2D3D46] my-1" />
                   )}
                   <button
                     type="button"
                     onClick={item.onClick}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition hover:bg-gray-50 dark:hover:bg-slate-800 ${
+                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition hover:bg-gray-50 dark:hover:bg-white/5 ${
                       item.danger
                         ? "text-red-500 dark:text-red-400"
                         : "text-gray-700 dark:text-slate-200"
