@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -19,6 +19,7 @@ const schema: yup.ObjectSchema<LoginFormValues> = yup.object({
 });
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -32,6 +33,7 @@ export const LoginForm = () => {
 
   const onSubmit = (data: LoginFormValues) => {
     console.log("Login data", data);
+    navigate("/home");
   };
 
   const baseFieldClasses =

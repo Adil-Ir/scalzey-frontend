@@ -44,7 +44,7 @@ const STATIC_SECTIONS: NavSection[] = [
   {
     heading: "General",
     items: [
-      { to: "/",                   label: "Home",               icon: <HiOutlineHome size={18} /> },
+      { to: "/home",               label: "Home",               icon: <HiOutlineHome size={18} /> },
       { to: "/dashboard",          label: "Dashboard",          icon: <HiOutlineViewGrid size={18} /> },
       { to: "/events-workshops",   label: "Events & Workshops", icon: <HiOutlineTemplate size={18} /> },
       { to: "/calendar",           label: "Calendar",           icon: <HiOutlineCalendar size={18} /> },

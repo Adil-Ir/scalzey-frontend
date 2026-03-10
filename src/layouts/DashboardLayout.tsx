@@ -4,7 +4,7 @@ import { Sidebar } from "./components/Sidebar";
 import { Topbar } from "./components/Topbar";
 
 const PAGE_TITLES: Record<string, string> = {
-  "/":                          "Home",
+  "/home":                      "Home",
   "/dashboard":                 "Dashboard",
   "/events-workshops":          "Events & Workshops",
   "/calendar":                  "Calendar",

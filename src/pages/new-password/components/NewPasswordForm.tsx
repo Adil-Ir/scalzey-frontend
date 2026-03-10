@@ -101,7 +101,7 @@ export const NewPasswordForm = () => {
 
       <button
         type="submit"
-        className="mt-4 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
+        className="mt-4 inline-flex w-44 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
       >
         Save password
       </button>
