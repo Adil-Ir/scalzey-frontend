@@ -21,7 +21,7 @@ export const ChannelSidebar = ({
         <button
           type="button"
           onClick={onClose}
-          className="md:hidden h-8 w-8 flex items-center justify-center rounded-lg text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/10"
+          className="h-8 w-8 flex items-center justify-center rounded-lg text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/10 shrink-0"
           aria-label="Close channels"
         >
           <FiX size={18} />

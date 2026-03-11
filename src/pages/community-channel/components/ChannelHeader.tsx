@@ -20,8 +20,8 @@ export const ChannelHeader = ({
       <button
         type="button"
         onClick={onChannelsClick}
-        className="md:hidden h-8 w-8 flex items-center justify-center rounded-lg text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/10 -ml-1 shrink-0"
-        aria-label="Open channels"
+        className="h-8 w-8 flex items-center justify-center rounded-lg text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/10 -ml-1 shrink-0"
+        aria-label="Toggle channels sidebar"
       >
         <FiMenu size={20} />
       </button>

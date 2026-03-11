@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "./components/Sidebar";
 import { Topbar } from "./components/Topbar";
@@ -28,6 +28,20 @@ const PAGE_TITLES: Record<string, string> = {
 export const DashboardLayout = () => {
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileSidebarOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (mobileSidebarOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [mobileSidebarOpen]);
 
   const pageTitle =
     PAGE_TITLES[pathname] ??
@@ -38,17 +52,38 @@ export const DashboardLayout = () => {
     pathname.startsWith("/classroom/") ? "Classroom" :
     "Dashboard");
 
+  const handleToggleSidebar = () => {
+    if (window.innerWidth < 768) {
+      setMobileSidebarOpen((prev) => !prev);
+    } else {
+      setCollapsed((prev) => !prev);
+    }
+  };
+
   return (
     <div className="h-screen overflow-hidden flex bg-[#F6F8F9] text-gray-900 dark:bg-[#0F161A] dark:text-slate-50">
-      {/* Sidebar — fixed height, never scrolls the page */}
-      <Sidebar collapsed={collapsed} />
+      {/* Mobile overlay backdrop */}
+      {mobileSidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 md:hidden bg-black/50"
+          onClick={() => setMobileSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Sidebar — overlay on mobile, inline on md+ */}
+      <Sidebar
+        collapsed={collapsed}
+        mobileOpen={mobileSidebarOpen}
+        onCloseMobile={() => setMobileSidebarOpen(false)}
+      />
 
       {/* Right column — fills remaining width, locked to viewport height */}
       <div id="dashboard-main" className="relative flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         {/* Topbar — always visible at top */}
         <Topbar
           pageTitle={pageTitle}
-          onToggleSidebar={() => setCollapsed((prev) => !prev)}
+          onToggleSidebar={handleToggleSidebar}
         />
         {/* Scrollable content area */}
         <main className="flex-1 overflow-y-auto p-4 md:p-6 xl:p-10">

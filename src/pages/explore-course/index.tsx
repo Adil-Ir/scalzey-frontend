@@ -162,8 +162,8 @@ export const ExploreCourses = () => {
   return (
     <div className="space-y-10">
       {/* Page header + filters */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className="text-xl font-semibold text-[#0F161A] dark:text-white shrink-0">
+      <div className="  grid  md:grid-cols-2 grid-cols-1 md:items-center justify-between gap-4">
+        <h1 className="text-xl  font-semibold text-[#0F161A] dark:text-white shrink-0">
           Courses
         </h1>
         <CourseFilters

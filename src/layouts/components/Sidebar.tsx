@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import type { ReactNode } from "react";
+import { FiX } from "react-icons/fi";
 import {
   HiOutlineHome, HiOutlineViewGrid, HiOutlineTemplate,
   HiOutlineCalendar, HiOutlineSearch, HiOutlineRefresh,
@@ -94,9 +95,11 @@ const UPDATES_SECTION: NavSection = {
 
 interface SidebarProps {
   collapsed: boolean;
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
-export const Sidebar = ({ collapsed }: SidebarProps) => {
+export const Sidebar = ({ collapsed, mobileOpen = false, onCloseMobile }: SidebarProps) => {
   const linkClass = (isActive: boolean) =>
     `flex items-center gap-3 rounded-lg px-3 py-2 transition-colors font-sora text-[14px] font-normal leading-[20.144px] ${
       collapsed ? "justify-center px-2" : ""
@@ -106,23 +109,43 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
         : "text-gray-500 hover:text-gray-900 dark:text-[rgba(255,255,255,0.75)] dark:hover:text-white"
     }`;
 
+  const showOnMobile = mobileOpen ?? false;
+
   return (
     <aside
-      className={`hidden md:flex flex-col border-r py-6 transition-all duration-300 min-h-screen bg-white border-gray-200 dark:bg-[#0F161A] dark:border-[#2D3D46] shrink-0 z-50 ${
-        collapsed ? "w-18 px-2 items-center" : "w-60.5 px-5"
+      className={`flex flex-col border-r py-6 transition-all duration-300 min-h-screen bg-white border-gray-200 dark:bg-[#0F161A] dark:border-[#2D3D46] shrink-0 z-50 ${
+        showOnMobile
+          ? "fixed inset-y-0 left-0 w-[260px] px-5 shadow-xl md:static md:w-auto md:shadow-none md:px-5"
+          : "hidden md:flex"
+      } ${
+        !showOnMobile
+          ? collapsed
+            ? "md:w-18 md:px-2 md:items-center"
+            : "md:w-60.5 md:px-5"
+          : ""
       }`}
     >
-      {/* Logo */}
-      <div className={`flex items-center mb-8 ${collapsed ? "justify-center" : "justify-between"}`}>
+      {/* Logo + mobile close button */}
+      <div className={`flex items-center mb-8 ${collapsed && !showOnMobile ? "justify-center" : "justify-between gap-2"}`}>
         <img
           src={logo}
           alt="Cotechy"
           className="shrink-0 object-contain"
           style={{
-            width: collapsed ? "40px" : "113.051px",
-            height: collapsed ? "10.15px" : "28.672px",
+            width: collapsed && !showOnMobile ? "40px" : "113.051px",
+            height: collapsed && !showOnMobile ? "10.15px" : "28.672px",
           }}
         />
+        {showOnMobile && onCloseMobile && (
+          <button
+            type="button"
+            onClick={onCloseMobile}
+            className="md:hidden h-8 w-8 flex items-center justify-center rounded-lg text-gray-500 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-white/10"
+            aria-label="Close menu"
+          >
+            <FiX size={18} />
+          </button>
+        )}
       </div>
 
       {/* Nav */}

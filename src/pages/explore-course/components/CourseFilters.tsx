@@ -25,7 +25,7 @@ export const CourseFilters = ({
   return (
     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
       {/* Search */}
-      <div className="flex-1 flex items-center gap-2 rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-[#1D242A] px-4 py-2.5">
+      <div className="flex-1 flex items-center gap-2 rounded-full  bg-white dark:bg-[#1D242A] px-4 py-2.5">
         <FiSearch size={15} className="text-gray-400 dark:text-slate-500 shrink-0" />
         <input
           type="text"
@@ -44,7 +44,7 @@ export const CourseFilters = ({
         <select
           value={activeCategory}
           onChange={(e) => onCategory(e.target.value)}
-          className="appearance-none rounded-full border border-gray-200 dark:border-white/10 bg-white dark:bg-[#1D242A] px-4 py-2.5 pr-8 text-sm text-gray-700 dark:text-slate-200 outline-none cursor-pointer"
+          className="appearance-none rounded-full   bg-white dark:bg-[#1D242A] px-4 py-2.5 pr-8 text-sm text-gray-700 dark:text-slate-200 outline-none cursor-pointer"
         >
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>

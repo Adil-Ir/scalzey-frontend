@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { COMMUNITY_CHANNELS, getInitialMessages } from "./data";
 import { ChannelSidebar } from "./components/ChannelSidebar";
@@ -21,6 +21,16 @@ export const CommunityChannelPage = () => {
   const [showCreatePoll, setShowCreatePoll] = useState(false);
   const [showAddPeople, setShowAddPeople] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [desktopSidebarExpanded, setDesktopSidebarExpanded] = useState(false);
+
+  useEffect(() => {
+    if (mobileSidebarOpen) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [mobileSidebarOpen]);
 
   if (!config) {
     return (
@@ -106,41 +116,52 @@ export const CommunityChannelPage = () => {
     setMobileSidebarOpen(false);
   };
 
+  const handleChannelsClick = () => {
+    setMobileSidebarOpen((prev) => !prev);
+    setDesktopSidebarExpanded((prev) => !prev);
+  };
+  const handleCloseSidebar = () => {
+    setMobileSidebarOpen(false);
+    setDesktopSidebarExpanded(false);
+  };
+
   return (
     <>
       <div
-        className="flex -m-4 md:-m-6 xl:-m-10 overflow-hidden"
+        className="relative flex -m-4 md:-m-6 xl:-m-10 overflow-hidden"
         style={{ height: "calc(100vh - 64px)" }}
       >
-        {/* Channel sidebar — overlay on mobile, fixed on tablet+ */}
-        <>
-          {mobileSidebarOpen && (
-            <div
-              className="fixed inset-0 z-40 md:hidden bg-black/50"
-              onClick={() => setMobileSidebarOpen(false)}
-              aria-hidden="true"
-            />
-          )}
+        {/* Mobile overlay — only on small screens */}
+        {mobileSidebarOpen && (
           <div
-            className={`${
-              mobileSidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-            } absolute md:relative inset-y-0 left-0 z-50 md:z-auto w-[260px] md:w-[200px] lg:w-[240px] shrink-0 flex flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A] transition-transform duration-200 ease-out`}
-          >
+            className="fixed inset-0 z-[45] md:hidden bg-black/50"
+            onClick={() => setMobileSidebarOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Channel sidebar — fixed on mobile (overlay), inline on md+ (collapsed by default) */}
+        <div
+          className={`fixed md:relative inset-y-0 left-0 z-50 md:z-auto flex flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A] transition-all duration-200 ease-out
+            ${mobileSidebarOpen ? "translate-x-0 w-[260px]" : "-translate-x-full w-[260px] md:translate-x-0"}
+            ${desktopSidebarExpanded ? "md:w-[200px] lg:w-[240px]" : "md:w-0 md:min-w-0 md:overflow-hidden"}`}
+        >
+          <div className="w-[260px] md:w-[200px] lg:w-[240px] min-w-[200px] lg:min-w-[240px] h-full flex flex-col shrink-0 overflow-hidden">
             <ChannelSidebar
               config={config}
               selectedChannelId={selectedChannelId}
               onSelectChannel={handleSelectChannel}
-              onClose={() => setMobileSidebarOpen(false)}
+              onClose={handleCloseSidebar}
             />
           </div>
-        </>
+        </div>
 
         <div className="flex-1 flex flex-col min-w-0 bg-[#F6F8F9] dark:bg-[#0F161A] relative">
           <ChannelHeader
             config={config}
             searchQuery={searchQuery}
             onSearchChange={setSearchQuery}
-            onChannelsClick={() => setMobileSidebarOpen(true)}
+            onChannelsClick={handleChannelsClick}
           />
           <ChannelMessageFeed
             messages={messages}
