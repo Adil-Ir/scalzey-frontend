@@ -53,7 +53,7 @@ export const SignupForm = () => {
   };
 
   const baseFieldClasses =
-    "rounded-full bg-transparent px-4 py-2.5 text-sm transition-colors text-gray-900 dark:text-slate-50";
+    "rounded-full bg-transparent px-4 h-[47px] min-h-[47px] flex items-center text-sm transition-colors text-gray-900 dark:text-slate-50";
 
   const getBorderClass = (hasError: boolean) =>
     hasError
@@ -95,7 +95,7 @@ export const SignupForm = () => {
 
       <div className="space-y-1.5 mb-3">
         <label className={labelClass} htmlFor="phone">Phone number</label>
-        <div className={`${baseFieldClasses} px-4 py-1.5 flex items-center gap-3 ${getBorderClass(!!errors.phone)}`}>
+        <div className={`${baseFieldClasses} gap-3 ${getBorderClass(!!errors.phone)}`}>
           <Controller
             control={control}
             name="phone"
@@ -106,6 +106,8 @@ export const SignupForm = () => {
                 onChange={(val) => onChange(val)}
                 inputProps={{ name: "phone", id: "phone" }}
                 containerClass="w-full"
+                containerStyle={{ height: 47, minHeight: 47 }}
+                inputStyle={{ height: 47, minHeight: 47 }}
                 buttonClass="!bg-transparent !border-none"
                 dropdownClass="!bg-slate-900 !text-slate-50"
               />

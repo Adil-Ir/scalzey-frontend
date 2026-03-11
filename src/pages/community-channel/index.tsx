@@ -75,6 +75,7 @@ export const CommunityChannelPage = () => {
       type: "poll",
       senderName: "Annette Black",
       senderColor: "bg-pink-600",
+      senderIsOnline: true,
       time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }),
       date: new Date().toISOString().split("T")[0],
       poll: { question: draft.question, options, totalVotes },

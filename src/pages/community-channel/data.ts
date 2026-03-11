@@ -10,6 +10,7 @@ export interface ChannelMessage {
   type: "text" | "poll";
   senderName: string;
   senderColor: string;
+  senderIsOnline?: boolean;
   time: string;
   date: string;
   text?: string;
@@ -27,6 +28,7 @@ export interface CommunityChannelConfig {
   name: string;
   displayName: string;
   avatarColors: string[];
+  avatarOnlineStatus?: boolean[];
   sections: ChannelSection[];
 }
 
@@ -36,6 +38,7 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
     name: "#Geeki_learn",
     displayName: "Gekilearn",
     avatarColors: ["bg-pink-500", "bg-purple-500", "bg-blue-400"],
+    avatarOnlineStatus: [true, true, false],
     sections: [
       { heading: "Chat", channels: [{ id: "general", name: "#general" }, { id: "new-joiness", name: "#new joiness" }] },
       { heading: "Information", channels: [{ id: "announcements", name: "#announcements" }, { id: "updates", name: "#updates" }] },
@@ -46,6 +49,7 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
     name: "#Product_Visuals",
     displayName: "Product Visuals",
     avatarColors: ["bg-yellow-500", "bg-green-500", "bg-pink-400"],
+    avatarOnlineStatus: [true, true, true],
     sections: [
       { heading: "Chat", channels: [{ id: "general", name: "#general" }, { id: "design", name: "#design" }] },
     ],
@@ -55,6 +59,7 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
     name: "#Dev_Crown",
     displayName: "Dev Crown",
     avatarColors: ["bg-red-400", "bg-orange-400", "bg-sky-400"],
+    avatarOnlineStatus: [true, false, true],
     sections: [
       { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
     ],
@@ -64,6 +69,7 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
     name: "#UX_Masters",
     displayName: "UX Masters",
     avatarColors: ["bg-teal-500", "bg-cyan-400", "bg-indigo-400"],
+    avatarOnlineStatus: [true, true, false],
     sections: [
       { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
     ],
@@ -73,6 +79,7 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
     name: "#Java_Guild",
     displayName: "Java Guild",
     avatarColors: ["bg-amber-500", "bg-rose-400", "bg-violet-400"],
+    avatarOnlineStatus: [true, false, true],
     sections: [
       { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
     ],
@@ -82,6 +89,7 @@ export const COMMUNITY_CHANNELS: Record<string, CommunityChannelConfig> = {
     name: "#Agile_Network",
     displayName: "Agile Network",
     avatarColors: ["bg-emerald-500", "bg-lime-400", "bg-sky-500"],
+    avatarOnlineStatus: [true, true, true],
     sections: [
       { heading: "Chat", channels: [{ id: "general", name: "#general" }] },
     ],
@@ -104,6 +112,7 @@ export const getInitialMessages = (): ChannelMessage[] => [
     type: "text",
     senderName: "Wade Warren",
     senderColor: "bg-blue-500",
+    senderIsOnline: true,
     text: "Welcome to #general! Feel free to introduce yourself.",
     time: "9:00 AM",
     date: new Date().toISOString().split("T")[0],
@@ -113,6 +122,7 @@ export const getInitialMessages = (): ChannelMessage[] => [
     type: "text",
     senderName: "Annette Black",
     senderColor: "bg-pink-600",
+    senderIsOnline: true,
     text: "Hi everyone! Excited to be here #general",
     time: "9:15 AM",
     date: new Date().toISOString().split("T")[0],
@@ -122,17 +132,18 @@ export const getInitialMessages = (): ChannelMessage[] => [
     type: "poll",
     senderName: "Wade Warren",
     senderColor: "bg-blue-500",
+    senderIsOnline: true,
     time: "9:30 AM",
     date: new Date().toISOString().split("T")[0],
     poll: {
       question: "How are you feeling today?",
       options: [
-        { label: "Good", votes: 12, percent: 35 },
-        { label: "Tired", votes: 8, percent: 24 },
-        { label: "Frustrated", votes: 5, percent: 15 },
-        { label: "Amazing", votes: 9, percent: 26 },
+        { label: "Good", votes: 12, percent: 28 },
+        { label: "Tired", votes: 8, percent: 19 },
+        { label: "Frustrated", votes: 17, percent: 66 },
+        { label: "Amazing", votes: 9, percent: 20 },
       ],
-      totalVotes: 34,
+      totalVotes: 43,
     },
   },
 ];

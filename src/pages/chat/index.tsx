@@ -62,7 +62,7 @@ export const ChatPage = () => {
           slug && slug !== "chats"
             ? "hidden md:flex"
             : "flex"
-        } w-full md:w-[260px] lg:w-[320px] shrink-0 flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]`}
+        } w-full md:w-[210px] lg:w-[270px] shrink-0 flex-col border-r border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]`}
       >
         <div className="px-4 py-4">
           <h2 className="text-[14px] font-semibold text-gray-900 dark:text-white">Chat</h2>

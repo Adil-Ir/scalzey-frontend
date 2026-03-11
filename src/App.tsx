@@ -33,7 +33,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<AuthLayout />}>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -70,7 +70,7 @@ const App = () => {
             <Route path="/edit-onboarding-profile" element={<EditOnboardingProfilePage />} />
           </Route>
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/login" replace />} />
         </Routes>
       </BrowserRouter>
       </UserProfileProvider>

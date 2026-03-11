@@ -75,10 +75,18 @@ export const ChannelMessageFeed = ({
 
           {items.map((msg) => (
             <div key={msg.id} className="flex gap-3 mb-5">
-              <span
-                className={`shrink-0 h-9 w-9 rounded-full flex items-center justify-center text-white text-[13px] font-semibold ${msg.senderColor}`}
-              >
-                {msg.senderName[0]}
+              <span className={`relative h-8 w-8 rounded-full flex items-center justify-center text-white text-[13px] font-semibold ${msg.senderColor} inline-flex shrink-0`}>
+                <span
+                  className={`text-[9px]`}
+                >
+                  {msg.senderName[0]}
+                </span>
+                <span
+                  className={`absolute bottom-0 right-0 z-10 h-3 w-3 rounded-full border-2 border-white dark:border-[#0F161A] bg-green-500 shadow-sm ${
+                    msg.senderIsOnline === false ? "opacity-0" : ""
+                  }`}
+                  title={msg.senderIsOnline ? "Online" : "Offline"}
+                />
               </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1.5 flex-wrap">
@@ -121,7 +129,7 @@ export const ChannelMessageFeed = ({
                       <div
                         className={`inline-block px-4 py-2.5 rounded-[12px] text-[13px] leading-relaxed max-w-[85%] sm:max-w-[75%] ${
                           msg.senderName === "Annette Black"
-                            ? "bg-white text-[#0F161A] dark:bg-[#2C5A79] dark:text-white"
+                            ? "bg-white text-[#0F161A] dark:bg-[#1D242A] dark:text-white"
                             : "bg-white text-[#0F161A] dark:bg-[#1D242A] dark:text-slate-200"
                         }`}
                       >
