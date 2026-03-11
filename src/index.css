@@ -3,6 +3,15 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+html {
+  min-height: 100%;
+}
+
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   font-family: "Sora", sans-serif;
 }

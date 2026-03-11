@@ -11,7 +11,7 @@ export const AuthLayout = () => {
 
   return (
     <div
-      className="min-h-screen relative"
+      className="min-h-full relative flex flex-col"
       style={{
         backgroundImage: `url(${authHeroBg})`,
         backgroundSize: "cover",
@@ -19,7 +19,7 @@ export const AuthLayout = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-360 mx-auto h-screen w-full p-4 md:p-6 xl:p-10">
+      <div className="max-w-360 mx-auto min-h-full w-full p-4 md:p-6 xl:p-10 flex flex-col flex-1">
         {/* Theme toggle — top right */}
         <div className="w-full flex justify-between items-center">
           <div className="">
@@ -39,7 +39,7 @@ export const AuthLayout = () => {
           </button>
         </div>
 
-        <div className="h-[calc(100%-52px)] flex items-center w-full">
+        <div className="flex-1 min-h-0 flex items-center w-full overflow-y-auto">
           <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-10 xl:gap-">
 
             <div className="hidden lg:flex w-full justify-center lg:justify-end">
