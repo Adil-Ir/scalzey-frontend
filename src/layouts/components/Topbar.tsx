@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FiBell, FiChevronDown, FiUser, FiHelpCircle, FiLogOut, FiMenu,
+  FiBell, FiChevronDown, FiUser, FiHelpCircle, FiLogOut, FiMenu, FiSun, FiMoon,
 } from "react-icons/fi";
 import { useUserProfile } from "../../context/UserProfileContext";
+import { useTheme } from "../../context/ThemeContext";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -24,6 +25,7 @@ interface TopbarProps {
 export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
   const navigate = useNavigate();
   const { profile } = useUserProfile();
+  const { theme, toggleTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -74,8 +76,18 @@ export const Topbar = ({ pageTitle, onToggleSidebar }: TopbarProps) => {
         </span>
       </div>
 
-      {/* Right — Notification badge, Bell, User dropdown (matches design) */}
+      {/* Right — Theme toggle, Notification badge, Bell, User dropdown */}
       <div className="flex items-center gap-3 md:gap-4">
+        {/* Theme toggle */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full transition bg-gray-100 text-gray-500 hover:text-gray-900 dark:bg-[#1A252B] dark:text-slate-300 dark:hover:text-white"
+        >
+          {theme === "dark" ? <FiSun size={18} /> : <FiMoon size={18} />}
+        </button>
+
         {/* Notification badge — red circle with count */}
         <button
           type="button"

@@ -7,6 +7,7 @@ import {
   HiOutlineGlobeAlt,
 } from "react-icons/hi";
 import { COMMUNITIES } from "../../pages/explore-community/data";
+import logo from "../../assets/logo.png";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -113,16 +114,15 @@ export const Sidebar = ({ collapsed }: SidebarProps) => {
     >
       {/* Logo */}
       <div className={`flex items-center mb-8 ${collapsed ? "justify-center" : "justify-between"}`}>
-        <div className="inline-flex items-center gap-2">
-          <div className="h-9 w-9 rounded-full bg-sky-400/90 flex items-center justify-center text-slate-950 font-bold text-sm shrink-0">
-            CO
-          </div>
-          {!collapsed && (
-            <span className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-              techy
-            </span>
-          )}
-        </div>
+        <img
+          src={logo}
+          alt="Cotechy"
+          className="shrink-0 object-contain"
+          style={{
+            width: collapsed ? "40px" : "113.051px",
+            height: collapsed ? "10.15px" : "28.672px",
+          }}
+        />
       </div>
 
       {/* Nav */}

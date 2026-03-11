@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { FiX } from "react-icons/fi";
 import type { Community } from "../data";
+
+const getPortalRoot = () =>
+  document.getElementById("dashboard-main") ?? document.body;
 
 interface JoinModalProps {
   community: Community;
@@ -21,12 +23,6 @@ const MiniAvatars = ({ colors }: { colors: string[] }) => (
 );
 
 export const JoinModal = ({ community, onClose, onJoin }: JoinModalProps) => {
-  const portalTarget = useRef<Element | null>(null);
-
-  useEffect(() => {
-    portalTarget.current = document.getElementById("dashboard-main");
-  }, []);
-
   const content = (
     <div
       className="absolute inset-0 z-50 flex items-center justify-center"
@@ -108,6 +104,6 @@ export const JoinModal = ({ community, onClose, onJoin }: JoinModalProps) => {
     </div>
   );
 
-  if (!portalTarget.current) return content;
-  return createPortal(content, portalTarget.current);
+  const root = getPortalRoot();
+  return createPortal(content, root);
 };

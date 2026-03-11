@@ -20,6 +20,7 @@ export const CommunityChannelPage = () => {
   const [messages, setMessages] = useState<ChannelMessage[]>(getInitialMessages);
   const [showCreatePoll, setShowCreatePoll] = useState(false);
   const [showAddPeople, setShowAddPeople] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   if (!config) {
     return (
@@ -99,8 +100,6 @@ export const CommunityChannelPage = () => {
     );
   };
 
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-
   const handleSelectChannel = (id: string) => {
     setSelectedChannelId(id);
     setMobileSidebarOpen(false);
@@ -135,7 +134,7 @@ export const CommunityChannelPage = () => {
           </div>
         </>
 
-        <div className="flex-1 flex flex-col min-w-0 bg-white dark:bg-[#0F161A] relative">
+        <div className="flex-1 flex flex-col min-w-0 bg-[#F6F8F9] dark:bg-[#0F161A] relative">
           <ChannelHeader
             config={config}
             searchQuery={searchQuery}

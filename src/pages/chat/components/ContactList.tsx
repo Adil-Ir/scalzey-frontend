@@ -20,9 +20,10 @@ export const Avatar = ({ contact, showStatus = false }: AvatarProps) => (
     </span>
     {showStatus && (
       <span
-        className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-white dark:border-[#0F161A] ${
+        className={`absolute bottom-0 right-0 z-10 h-3 w-3 rounded-full border-2 border-white dark:border-[#0F161A] shadow-sm ${
           contact.isOnline ? "bg-green-500" : "bg-gray-400"
         }`}
+        title={contact.isOnline ? "Online" : "Offline"}
       />
     )}
   </span>

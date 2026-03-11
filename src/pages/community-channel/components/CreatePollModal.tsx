@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { FiX } from "react-icons/fi";
 
@@ -15,14 +15,12 @@ interface CreatePollModalProps {
 const MIN_OPTIONS = 2;
 const MAX_OPTIONS = 10;
 
+const getPortalRoot = () =>
+  document.getElementById("dashboard-main") ?? document.body;
+
 export const CreatePollModal = ({ onClose, onCreate }: CreatePollModalProps) => {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["Good", "Tired", "Frustrated", "Amazing"]);
-  const portalTarget = useRef<Element | null>(null);
-
-  useEffect(() => {
-    portalTarget.current = document.getElementById("dashboard-main");
-  }, []);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -139,6 +137,6 @@ export const CreatePollModal = ({ onClose, onCreate }: CreatePollModalProps) => 
     </div>
   );
 
-  if (!portalTarget.current) return content;
-  return createPortal(content, portalTarget.current);
+  const root = getPortalRoot();
+  return root ? createPortal(content, root) : content;
 };

@@ -1,24 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSend, FiSmile, FiPaperclip, FiX } from "react-icons/fi";
+import EmojiPicker, { type EmojiClickData, Theme, EmojiStyle } from "emoji-picker-react";
+import { useTheme } from "../../../context/ThemeContext";
 
 interface MessageInputProps {
   onSend: (text: string, files?: File[]) => void;
 }
 
-const COMMON_EMOJIS = [
-  "😀",
-  "😊",
-  "👍",
-  "❤️",
-  "😂",
-  "🔥",
-  "✨",
-  "🙏",
-  "👋",
-  "✅",
-];
-
 export const MessageInput = ({ onSend }: MessageInputProps) => {
+  const { theme } = useTheme();
   const [text, setText] = useState("");
   const [isMultiLine, setIsMultiLine] = useState(false);
   const [pendingFiles, setPendingFiles] = useState<
@@ -57,8 +47,8 @@ export const MessageInput = ({ onSend }: MessageInputProps) => {
     }
   };
 
-  const handleEmoji = (emoji: string) => {
-    setText((prev) => prev + emoji);
+  const handleEmojiClick = (emojiData: EmojiClickData) => {
+    setText((prev) => prev + emojiData.emoji);
     setShowEmojiPicker(false);
   };
 
@@ -86,7 +76,9 @@ export const MessageInput = ({ onSend }: MessageInputProps) => {
   };
 
   const pendingRef = useRef(pendingFiles);
-  pendingRef.current = pendingFiles;
+  useEffect(() => {
+    pendingRef.current = pendingFiles;
+  }, [pendingFiles]);
   useEffect(
     () => () => {
       pendingRef.current.forEach(
@@ -106,7 +98,7 @@ export const MessageInput = ({ onSend }: MessageInputProps) => {
   }, [text]);
 
   return (
-    <div className="shrink-0 px-4 md:px-6 py-4 border-t border-gray-200 dark:border-[#2D3D46] bg-white dark:bg-[#0F161A]">
+    <div className="shrink-0 px-4 md:px-6 py-4 bg-[#F6F8F9] dark:bg-[#0F161A]">
       {pendingFiles.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-3">
           {pendingFiles.map((entry, i) => (
@@ -141,7 +133,7 @@ export const MessageInput = ({ onSend }: MessageInputProps) => {
       )}
 
       <div
-        className={`flex items-end gap-2 pl-4 pr-2 py-3 bg-gray-100 dark:bg-[#1D242A] min-h-[52px] transition-[border-radius] duration-200 ${
+        className={`flex items-end gap-2 pl-4 pr-2 py-3 bg-white dark:bg-[#1D242A] min-h-[52px] transition-[border-radius] duration-200 ${
           isMultiLine ? "rounded-xl" : "rounded-full"
         }`}
       >
@@ -174,17 +166,15 @@ export const MessageInput = ({ onSend }: MessageInputProps) => {
               <FiSmile size={18} />
             </button>
             {showEmojiPicker && (
-              <div className="absolute bottom-full left-0 mb-2 p-2 rounded-xl z-10 flex flex-wrap gap-1 max-w-[200px] bg-white dark:bg-[#1D242A] border border-gray-200 dark:border-[#2D3D46]">
-                {COMMON_EMOJIS.map((emoji) => (
-                  <button
-                    key={emoji}
-                    type="button"
-                    onClick={() => handleEmoji(emoji)}
-                    className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 text-lg"
-                  >
-                    {emoji}
-                  </button>
-                ))}
+              <div className="absolute bottom-full right-0 mb-2 z-50 max-w-[calc(100vw-2rem)] max-h-[80vh] overflow-auto">
+                <EmojiPicker
+                  onEmojiClick={handleEmojiClick}
+                  theme={theme === "dark" ? Theme.DARK : Theme.LIGHT}
+                  width={400}
+                  height={480}
+                  emojiStyle={EmojiStyle.NATIVE}
+                  searchPlaceHolder="Search emoji"
+                />
               </div>
             )}
           </div>

@@ -35,7 +35,7 @@ export const ChannelHeader = ({
       </div>
     </div>
     <div className="flex-1 flex justify-center min-w-0">
-      <div className="flex items-center gap-2 rounded-[26.53px] bg-gray-100 dark:bg-[#1D242A] px-3 md:px-5 py-2.5 md:py-3 w-full max-w-[320px] border-0">
+      <div className="flex items-center gap-2 rounded-[26.53px] bg-[#F6F8F9] dark:bg-[#1D242A] px-3 md:px-5 py-2.5 md:py-3 w-full max-w-full sm:max-w-[480px] border-0 min-w-0">
         <FiSearch size={14} className="text-gray-400 dark:text-slate-500 shrink-0" />
         <input
           type="text"

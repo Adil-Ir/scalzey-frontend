@@ -28,9 +28,9 @@ export const profileSchema: yup.ObjectSchema<ProfileFormValues> = yup.object({
   location: yup.string().optional().default(""),
   website: yup
     .string()
-    .optional()
+    .default("")
     .test("url", "Enter a valid URL", (val) => !val || val === "" || urlRegex.test(val)),
   aboutMe: yup.string().optional().default(""),
   avatarUrl: yup.string().nullable().optional().default(null),
-  roles: yup.array().of(yup.string()).optional().default([]),
-});
+  roles: yup.array().of(yup.string().defined()).optional().default([]),
+}) as yup.ObjectSchema<ProfileFormValues>;

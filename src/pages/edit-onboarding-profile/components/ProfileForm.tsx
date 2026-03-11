@@ -105,6 +105,7 @@ export const ProfileForm = ({ onSaved, showBackButton, onBack }: ProfileFormProp
   };
 
   const handleAddRole = (role: string) => {
+    // eslint-disable-next-line react-hooks/incompatible-library
     const current = watch("roles");
     if (!current.includes(role)) {
       setValue("roles", [...current, role], { shouldValidate: true });

@@ -23,6 +23,7 @@ export const ChatPage = () => {
 
   useEffect(() => {
     if (contact?.slug) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: mark as read when viewing
       setUnreadByContact((prev) => ({ ...prev, [contact.slug]: 0 }));
     }
   }, [contact?.slug]);
@@ -80,7 +81,7 @@ export const ChatPage = () => {
           slug && slug !== "chats"
             ? "flex"
             : "hidden md:flex"
-        } flex-1 flex flex-col min-w-0 bg-white dark:bg-[#0F161A]`}
+        } flex-1 flex flex-col min-w-0 bg-[#F6F8F9] dark:bg-[#0F161A]`}
       >
         <ChatHeader
           contact={contact}

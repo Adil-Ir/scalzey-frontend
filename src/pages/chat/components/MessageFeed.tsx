@@ -19,13 +19,13 @@ export const MessageFeed = ({ messages, searchQuery, contacts }: MessageFeedProp
     contacts.find((c) => c.id === senderId);
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 space-y-4 bg-white dark:bg-[#0F161A]">
+    <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 space-y-4 bg-[#F6F8F9] dark:bg-[#0F161A]">
       {filtered.map((m) => {
         const senderContact = m.senderId !== "me" ? getSenderContact(m.senderId) : null;
         return (
           <div
             key={m.id}
-            className={`flex gap-3 ${m.senderId === "me" ? "justify-end" : "justify-start"}`}
+            className={`flex items-start gap-3 ${m.senderId === "me" ? "justify-end" : "justify-start"}`}
           >
             {m.senderId !== "me" && senderContact && (
               <Avatar contact={senderContact} showStatus />
@@ -74,10 +74,10 @@ export const MessageFeed = ({ messages, searchQuery, contacts }: MessageFeedProp
               )}
               {m.text && (
                 <div
-                  className={`inline-block text-[13px] ${
+                  className={`inline-block text-[13px] px-4 py-2 rounded-[12px] ${
                     m.senderId === "me"
-                      ? "px-4 py-2 rounded-[12px] bg-[#2C5A79] text-white"
-                      : "px-4 py-2 rounded-[12px] bg-[#1D242A] text-slate-200 border-0"
+                      ? "bg-white text-[#0F161A] dark:bg-[#2C5A79] dark:text-white"
+                      : "bg-white text-[#0F161A] dark:bg-[#1D242A] dark:text-slate-200"
                   }`}
                 >
                   {m.text.startsWith("http") ? (

@@ -55,7 +55,7 @@ export const ChannelMessageFeed = ({
   const seenDates = new Set<string>();
 
   return (
-    <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 space-y-1 bg-white dark:bg-[#0F161A]">
+    <div className="flex-1 overflow-y-auto px-4 md:px-6 py-4 space-y-1 bg-[#F6F8F9] dark:bg-[#0F161A]">
       {grouped.map(({ date, items }) => (
         <div key={date}>
           {!seenDates.has(date) && (
@@ -119,10 +119,10 @@ export const ChannelMessageFeed = ({
                     )}
                     {msg.text && (
                       <div
-                        className={`inline-block px-4 py-2.5 rounded-2xl text-[13px] leading-relaxed max-w-[85%] sm:max-w-[75%] ${
+                        className={`inline-block px-4 py-2.5 rounded-[12px] text-[13px] leading-relaxed max-w-[85%] sm:max-w-[75%] ${
                           msg.senderName === "Annette Black"
-                            ? "bg-[#44BCFF] text-white rounded-br-md"
-                            : "bg-gray-100 dark:bg-[#1D242A] text-gray-800 dark:text-slate-200 rounded-bl-md border border-gray-200 dark:border-[#2D3D46]"
+                            ? "bg-white text-[#0F161A] dark:bg-[#2C5A79] dark:text-white"
+                            : "bg-white text-[#0F161A] dark:bg-[#1D242A] dark:text-slate-200"
                         }`}
                       >
                         {msg.text.startsWith("http") ? (

@@ -11,7 +11,10 @@ export const ProfileUpload = ({ value, onChange }: ProfileUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (value !== undefined) setPreview(value);
+    if (value !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync controlled value to local state
+      setPreview(value);
+    }
   }, [value]);
 
   const handleClick = () => fileInputRef.current?.click();
