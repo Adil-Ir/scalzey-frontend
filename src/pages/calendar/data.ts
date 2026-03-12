@@ -90,6 +90,16 @@ export function isSameDay(a: Date, b: Date): boolean {
   );
 }
 
+/** Day label for header badge (e.g. "Ramdan 2026") — from API in production */
+export function getDayLabel(date: Date): string {
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  const d = date.getDate();
+  if (m === 2 && d >= 10 && d <= 31) return `Ramdan ${y}`;
+  if (m === 1 && d >= 18) return `Ramdan ${y}`;
+  return `${MONTH_NAMES[m]} ${y}`;
+}
+
 /** Returns Monday of the week containing `date` */
 export function getWeekStart(date: Date): Date {
   const d = new Date(date);

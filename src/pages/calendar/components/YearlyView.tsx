@@ -86,7 +86,7 @@ export const YearlyView = ({ currentDate, onDateChange }: Props) => {
 
       {/* 12 month grid */}
       <div
-        className="flex-1 p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex-1 p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-hidden min-h-0"
         style={{ alignContent: "start" }}
       >
         {Array.from({ length: 12 }, (_, m) => (
