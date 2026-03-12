@@ -101,7 +101,7 @@ export const CalendarPage = () => {
           >
             <FiChevronLeft size={15} />
           </button>
-          <span className="text-sm font-semibold text-gray-700 dark:text-white min-w-[140px] text-center">
+          <span className="text-sm font-semibold text-gray-700 dark:text-white min-w-35 text-center">
             {headerLabel(currentDate, view)}
           </span>
           <button
@@ -124,7 +124,7 @@ export const CalendarPage = () => {
         <YearlyView currentDate={currentDate} onDateChange={setCurrentDate} />
       ) : (
         <div
-          className="flex-1 overflow-hidden bg-white dark:bg-[#1D242A]"
+          className="flex-1 overflow-hidden "
           style={{ borderRadius: "26.53px" }}
         >
           <Calendar

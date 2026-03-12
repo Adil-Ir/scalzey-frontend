@@ -32,7 +32,7 @@ export const MonthlyView = ({ currentDate, onDateChange }: Props) => {
 
   return (
     <div
-      className="bg-white dark:bg-[#1D242A] flex flex-col overflow-hidden h-[calc(100vh-200px)]"
+      className=" flex flex-col overflow-hidden h-[calc(100vh-200px)]"
       style={{ borderRadius: "26.53px" }}
     >
       {/* Header */}
@@ -65,7 +65,7 @@ export const MonthlyView = ({ currentDate, onDateChange }: Props) => {
       <div className="grid grid-cols-7 flex-1 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" style={{ alignContent: "start" }}>
         {cells.map((cell, i) => {
           if (!cell) return (
-            <div key={i} className="border-b border-r border-gray-100 dark:border-white/5 min-h-[90px]" />
+            <div key={i} className="border-b border-r border-gray-100 dark:border-white/5 " />
           );
 
           const isToday    = isSameDay(cell, today);
@@ -75,7 +75,7 @@ export const MonthlyView = ({ currentDate, onDateChange }: Props) => {
           return (
             <div
               key={i}
-              className={`border-b border-gray-100 dark:border-white/5 min-h-[90px] p-1.5 flex flex-col gap-1 ${!isLastInRow ? "border-r" : ""}`}
+              className={`border-b border-gray-100 dark:border-white/5 p-1.5 flex flex-col gap-1 ${!isLastInRow ? "border-r" : ""}`}
             >
               {/* Date number */}
               <span

@@ -20,7 +20,7 @@ export const WeeklyView = ({ currentDate, onDateChange }: Props) => {
 
   return (
     <div
-      className="bg-white dark:bg-[#1D242A] flex flex-col overflow-hidden h-[calc(100vh-200px)]"
+      className=" flex flex-col overflow-hidden "
       style={{ borderRadius: "26.53px" }}
     >
       {/* Top bar */}
