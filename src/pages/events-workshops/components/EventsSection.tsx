@@ -143,7 +143,7 @@ export const EventsSection = () => {
               {/* Bottom bar */}
               <div className="flex items-center justify-between p-5 gap-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-[12px] text-gray-500 dark:text-white">
+                  <span className="text-[12px] text-[#0F161A] dark:text-white">
                     {ev.participants}
                   </span>
                   <MemberAvatars colors={ev.participantColors} />

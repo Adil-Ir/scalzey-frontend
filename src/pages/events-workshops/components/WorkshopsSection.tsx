@@ -62,7 +62,7 @@ export const WorkshopsSection = () => {
   return (
     <>
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-5">
+        <h2 className="text-lg font-semibold text-[#0F161A] dark:text-white mb-5">
           Workshops
         </h2>
 
@@ -93,7 +93,7 @@ export const WorkshopsSection = () => {
               </div>
 
               {/* Title */}
-              <h3 className="text-[18px] font-semibold text-gray-900 dark:text-white leading-snug">
+              <h3 className="text-[18px] font-semibold text-[#0F161A] dark:text-white leading-snug">
                 {ws.title}
               </h3>
 
@@ -101,9 +101,9 @@ export const WorkshopsSection = () => {
               <div className="flex gap-2">
                 <HiOutlineInformationCircle
                   size={16}
-                  className="shrink-0 mt-0.5 text-white dark:text-white"
+                  className="shrink-0 mt-0.5 text-[#99A2A8BF] dark:text-white"
                 />
-                <p className="text-[12px] leading-relaxed text-gray-500 dark:text-[#99A2A8]">
+                <p className="text-[12px] leading-relaxed text-[#99A2A8BF] dark:text-[#99A2A8]">
                   {ws.description}
                 </p>
               </div>
@@ -113,16 +113,16 @@ export const WorkshopsSection = () => {
                 <span className="flex items-center gap-1.5">
                   <PiUsers
                     size={18}
-                    className="text-gray-400 dark:text-white"
+                    className="text-[#0F161ABF] dark:text-white"
                   />
                   <span className="dark:text-white text-gray-500">{ws.members}</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <FiClock
                     size={13}
-                    className="text-gray-400 dark:text-white"
+                    className="text-[#0F161ABF] dark:text-white"
                   />
-                  <span className="dark:text-white text-gray-500">{ws.daysLeft} <span className="dark:text-[#99A2A8] text-gray-400">remaining</span></span>
+                  <span className="dark:text-white text-[#0F161ABF]">{ws.daysLeft} <span className="dark:text-[#99A2A8] text-[#0F161ABF]">remaining</span></span>
                 </span>
               </div>
 
@@ -144,10 +144,10 @@ export const WorkshopsSection = () => {
                 <div className="flex items-center gap-1.5">
                   <PiUsers
                     size={18}
-                    className="text-gray-400 dark:text-white"
+                    className="text-[#0F161ABF] dark:text-white"
                   />
-                  <span className="text-[13px] text-gray-500 dark:text-white">
-                    {ws.participants} <span className="dark:text-[#99A2A8] text-gray-400">remaining</span>
+                  <span className="text-[13px] text-[#0F161ABF] dark:text-white">
+                    {ws.participants} <span className="dark:text-[#99A2A8] text-[#0F161ABF]">remaining</span>
                   </span>
                 </div>
               </div>
