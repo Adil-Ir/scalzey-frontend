@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HiOutlineInformationCircle } from "react-icons/hi";
-import { BsPeopleFill } from "react-icons/bs";
-import { MdOutlineMenuBook } from "react-icons/md";
+import { PiUsers } from "react-icons/pi";
+
 import { FiClock } from "react-icons/fi";
 import { WorkshopModal } from "./WorkshopModal";
 
@@ -25,10 +25,10 @@ const WORKSHOPS: Workshop[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur. Suscipit sapien convallis neque sagittis malesuada mi erat natoque malesuada.",
     members: "245+",
-    daysLeft: "12 days remaining",
+    daysLeft: "12 days ",
     instructor: "Dwoskey",
     instructorColor: "bg-pink-500",
-    participants: "245+ participants",
+    participants: "245+ ",
   },
   {
     id: 2,
@@ -37,10 +37,10 @@ const WORKSHOPS: Workshop[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur. Suscipit sapien convallis neque sagittis malesuada mi erat natoque malesuada.",
     members: "245+",
-    daysLeft: "12 days remaining",
+    daysLeft: "12 days ",
     instructor: "Dwoskey",
     instructorColor: "bg-purple-500",
-    participants: "245+ participants",
+    participants: "245+ ",
   },
   {
     id: 3,
@@ -49,10 +49,10 @@ const WORKSHOPS: Workshop[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur. Suscipit sapien convallis neque sagittis malesuada mi erat natoque malesuada.",
     members: "245+",
-    daysLeft: "12 days remaining",
+    daysLeft: "12 days ",
     instructor: "Dwoskey",
     instructorColor: "bg-orange-500",
-    participants: "245+ participants",
+    participants: "245+ ",
   },
 ];
 
@@ -62,7 +62,7 @@ export const WorkshopsSection = () => {
   return (
     <>
       <div>
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-5">
           Workshops
         </h2>
 
@@ -74,15 +74,26 @@ export const WorkshopsSection = () => {
               style={{ borderRadius: "26.53px", padding: "22px" }}
             >
               {/* Course name pill */}
-              <div className="flex items-center gap-2 border border-orange-400/60 rounded-full px-3 py-1.5 self-start w-full justify-center">
-                <MdOutlineMenuBook size={14} className="text-orange-400 shrink-0" />
-                <span className="text-[12px] font-medium text-orange-400 truncate">
+              <div className="flex items-center gap-2 border border-[#FF9B44] rounded-full px-3 py-3 self-start w-full justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M12 15H4C3.73478 15 3.48043 14.8946 3.29289 14.7071C3.10536 14.5196 3 14.2652 3 14V2C3 1.73478 3.10536 1.48043 3.29289 1.29289C3.48043 1.10536 3.73478 1 4 1H12C12.2652 1 12.5196 1.10536 12.7071 1.29289C12.8946 1.48043 13 1.73478 13 2V10.309L10.5 9.059L8 10.309V2H4V14H12V12H13V14C12.9996 14.2651 12.8941 14.5192 12.7067 14.7067C12.5192 14.8941 12.2651 14.9996 12 15ZM10.5 7.941L12 8.691V2H9V8.691L10.5 7.941Z"
+                    fill="#FF9B44"
+                  />
+                </svg>
+                <span className="text-[12px]  text-[#FF9B44] truncate">
                   {ws.courseName}
                 </span>
               </div>
 
               {/* Title */}
-              <h3 className="text-[17px] font-bold text-gray-900 dark:text-white leading-snug">
+              <h3 className="text-[18px] font-semibold text-gray-900 dark:text-white leading-snug">
                 {ws.title}
               </h3>
 
@@ -90,27 +101,33 @@ export const WorkshopsSection = () => {
               <div className="flex gap-2">
                 <HiOutlineInformationCircle
                   size={16}
-                  className="shrink-0 mt-0.5 text-gray-400 dark:text-slate-500"
+                  className="shrink-0 mt-0.5 text-white dark:text-white"
                 />
-                <p className="text-[12px] leading-relaxed text-gray-500 dark:text-[#FFFFFFBF]">
+                <p className="text-[12px] leading-relaxed text-gray-500 dark:text-[#99A2A8]">
                   {ws.description}
                 </p>
               </div>
 
               {/* Members + days */}
-              <div className="flex items-center gap-4 text-[12px] text-gray-500 dark:text-slate-400">
+              <div className="grid grid-cols-2 items-center gap-4 text-[14px] text-gray-500 dark:text-slate-400">
                 <span className="flex items-center gap-1.5">
-                  <BsPeopleFill size={13} className="text-gray-400 dark:text-slate-500" />
-                  {ws.members}
+                  <PiUsers
+                    size={18}
+                    className="text-gray-400 dark:text-white"
+                  />
+                  <span className="dark:text-white text-gray-500">{ws.members}</span>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <FiClock size={13} className="text-gray-400 dark:text-slate-500" />
-                  {ws.daysLeft}
+                  <FiClock
+                    size={13}
+                    className="text-gray-400 dark:text-white"
+                  />
+                  <span className="dark:text-white text-gray-500">{ws.daysLeft} <span className="dark:text-[#99A2A8] text-gray-400">remaining</span></span>
                 </span>
               </div>
 
               {/* Divider */}
-              <hr className="border-gray-100 dark:border-white/10" />
+              <hr className="border-gray-100 dark:border-[#2D3D46]" />
 
               {/* Instructor row */}
               <div className="flex items-center justify-between">
@@ -120,23 +137,27 @@ export const WorkshopsSection = () => {
                   >
                     {ws.instructor[0]}
                   </span>
-                  <span className="text-[13px] text-gray-700 dark:text-[#FFFFFFBF]">
+                  <span className="text-[13px] text-gray-700 dark:text-white">
                     {ws.instructor}
                   </span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <BsPeopleFill size={13} className="text-gray-400 dark:text-slate-500" />
-                  <span className="text-[12px] text-gray-500 dark:text-slate-400">
-                    {ws.participants}
+                  <PiUsers
+                    size={18}
+                    className="text-gray-400 dark:text-white"
+                  />
+                  <span className="text-[13px] text-gray-500 dark:text-white">
+                    {ws.participants} <span className="dark:text-[#99A2A8] text-gray-400">remaining</span>
                   </span>
                 </div>
               </div>
+               <hr className="border-gray-100 mb-2 dark:border-[#2D3D46]" />
 
               {/* Enroll button — opens modal */}
               <button
                 type="button"
                 onClick={() => setSelected(ws)}
-                className="w-full py-2.5 rounded-full bg-[#44BCFF] text-white text-[13px] font-medium hover:bg-[#2eaef5] transition"
+                className="w-full py-3 rounded-full bg-[#44BCFF] text-white text-[13px] font-medium hover:bg-[#2eaef5] transition"
               >
                 Enroll Now
               </button>
