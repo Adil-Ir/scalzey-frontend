@@ -1,8 +1,8 @@
 export const AuthHero = () => {
   return (
     <main className="w-full">
-      <h1 className="font-semibold text-[40px] md:text-[72px] lg:text-[90px] xl:text-[108px] leading-[112%] lg:tracking-[-6px] xl:tracking-[-10px] text-white">
-        Build Your{" "}<br />
+      <h1 className="font-semibold text-[25px] lg:text-[72px] xl:text-[90px] 2xl:text-[108px] leading-[112%] mb-3 lg:tracking-[-6px] xl:tracking-[-10px] text-white">
+        Build Your{" "}<br className="md:block hidden" />
         <span className="text-sky-400 drop-shadow-[0_0_25px_rgba(56,189,248,0.8)]">
           Skills
         </span>{" "}

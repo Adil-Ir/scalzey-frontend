@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const NewPasswordPage = () => {
   return (
-    <section className="w-full rounded-[26px] bg-white dark:bg-[#1D242A] p-12 xl:p-16">
+    <section className="w-full rounded-[26px] bg-white dark:bg-[#1D242A] p-7 xl:p-16">
       <div className="mb-22.75 flex items-center justify-between">
         <Link
           to="/forgot-password"

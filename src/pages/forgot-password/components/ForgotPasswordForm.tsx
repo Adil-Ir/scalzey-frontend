@@ -41,7 +41,7 @@ export const ForgotPasswordForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-      <div className="mb-10">
+      <div className="lg:mb-10">
         <label
           className="font-poppins text-[13.259px] font-normal leading-none text-gray-900 dark:text-white"
           htmlFor="email"
@@ -64,7 +64,7 @@ export const ForgotPasswordForm = () => {
 
       <button
         type="submit"
-        className="mt-4 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
+        className="lg:mt-4 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
       >
         Submit
       </button>
