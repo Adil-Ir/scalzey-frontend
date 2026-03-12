@@ -1,20 +1,26 @@
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import {
-  CALENDAR_EVENTS, HOURS, DAY_NAMES_FULL,
+  type CalendarEvent, HOURS, DAY_NAMES_FULL,
   formatHourLabel, isSameDay, addDays, getDayLabel,
 } from "../data";
 
-const HOUR_SLOTS = 23; /* 1 AM to 11 PM */
-const TIME_COLUMN_WIDTH = 76; /* px — was 56, +20 */
+const HOUR_SLOTS = 23;
+const TIME_COLUMN_WIDTH = 76;
+
+const EVENT_COLORS = {
+  virtual: { border: "border-[#44BCFF]", bg: "bg-[#44BCFF]/10", text: "text-[#44BCFF]" },
+  workshop: { border: "border-orange-400", bg: "bg-orange-400/10", text: "text-orange-400" },
+} as const;
 
 interface Props {
+  events: CalendarEvent[];
   currentDate: Date;
   onDateChange: (d: Date) => void;
 }
 
-export const DailyView = ({ currentDate, onDateChange }: Props) => {
+export const DailyView = ({ events, currentDate, onDateChange }: Props) => {
   const today = new Date();
-  const dayEvents = CALENDAR_EVENTS.filter((e) => isSameDay(e.date, currentDate));
+  const dayEvents = events.filter((e) => isSameDay(e.date, currentDate));
 
   const dayName = DAY_NAMES_FULL[currentDate.getDay()];
   const dayNum = currentDate.getDate();
@@ -72,13 +78,14 @@ export const DailyView = ({ currentDate, onDateChange }: Props) => {
             const startSlot = ev.startHour - 1 + ev.startMin / 60;
             const startPct = (startSlot / HOUR_SLOTS) * 100;
             const heightPct = (ev.durationMin / 60 / HOUR_SLOTS) * 100;
+            const colors = EVENT_COLORS[ev.type === "workshop" ? "workshop" : "virtual"];
             return (
               <div
                 key={ev.id}
-                className={`absolute right-4 rounded-lg border-l-4 px-3 py-1.5 ${ev.borderColor} ${ev.bgColor}`}
+                className={`absolute right-4 rounded-lg border-l-4 px-3 py-1.5 ${colors.border} ${colors.bg}`}
                 style={{ left: TIME_COLUMN_WIDTH, top: `${startPct}%`, height: `${Math.max(heightPct, 4)}%` }}
               >
-                <p className={`text-[12px] font-semibold ${ev.textColor}`}>{ev.title}</p>
+                <p className={`text-[12px] font-semibold ${colors.text}`}>{ev.title}</p>
                 <p className="text-[11px] text-gray-400 dark:text-slate-500">
                   {`${String(ev.startHour).padStart(2,"0")}:${String(ev.startMin).padStart(2,"0")} ${ev.startHour < 12 ? "AM" : "PM"}`}
                 </p>

@@ -86,6 +86,11 @@ button,
 .rbc-off-range-bg { background: #fafafa; }
 .rbc-today { background: rgba(68,188,255,0.06); }
 .rbc-date-cell { padding: 6px 10px; font-size: 12px; color: #374151; }
+/* Month view — day header row (Mon, Tue, Wed…) */
+.rbc-month-header .rbc-header {
+  min-height: 56px;
+  padding: 16px 10px;
+}
 .rbc-date-cell.rbc-now { font-weight: 700; color: #44BCFF; }
 .rbc-row-bg { border-color: #f3f4f6; }
 .rbc-month-row { border-color: #f3f4f6; }
@@ -108,11 +113,67 @@ button,
   background: #44BCFF;
 }
 .rbc-allday-cell { display: none; }
-/* Time column & header gutter: min 76px so they align, no border */
+/* Time column & header gutter: fixed 76px so they align, no border */
 .rbc-time-gutter,
-.rbc-time-header-gutter {
+.rbc-time-header-gutter,
+.rbc-label.rbc-time-header-gutter {
+  width: 76px !important;
   min-width: 76px !important;
+  max-width: 76px !important;
+  flex: 0 0 76px !important;
   border: none !important;
+}
+/* Weekly view — use CSS Grid for pixel-perfect column alignment */
+.rbc-time-header {
+  display: grid !important;
+  grid-template-columns: 76px repeat(7, minmax(0, 1fr));
+  width: 100%;
+}
+.rbc-time-header > .rbc-label.rbc-time-header-gutter {
+  grid-column: 1;
+}
+.rbc-time-header > .rbc-time-header-content {
+  grid-column: 2 / -1;
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  min-width: 0;
+  border: none !important;
+}
+.rbc-time-header .rbc-row.rbc-time-header-cell {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.rbc-time-header .rbc-row.rbc-time-header-cell .rbc-header {
+  min-width: 0;
+}
+
+.rbc-time-content {
+  display: grid !important;
+  grid-template-columns: 76px repeat(7, minmax(0, 1fr));
+  width: 100%;
+}
+.rbc-time-content > .rbc-time-gutter {
+  grid-column: 1;
+}
+.rbc-time-content > .rbc-day-slot {
+  min-width: 0;
+}
+/* Remove borders that cause misalignment */
+.rbc-time-view .rbc-time-header-content,
+.rbc-time-view .rbc-time-content > * + * > * {
+  border-left: none !important;
+}
+
+/* Time labels — keep within gutter */
+.rbc-time-view .rbc-time-gutter .rbc-label {
+  padding: 0 8px;
+  text-align: right;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.rbc-time-view {
+  border-right: none !important;
 }
 
 /* ─── Dark mode overrides ─── */

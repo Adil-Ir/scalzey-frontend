@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import type { View } from "react-big-calendar";
 import { format, parse, startOfWeek, getDay } from "date-fns";
@@ -7,25 +7,14 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import { YearlyView } from "./components/YearlyView";
 import { DailyView } from "./components/DailyView";
-import { CALENDAR_EVENTS } from "./data";
+import { type CalendarEvent, toRbcEvent } from "./data";
 
-/* ── localizer ── */
 const locales = { "en-US": enUS };
 const localizer = dateFnsLocalizer({ format, parse, startOfWeek, getDay, locales });
 
-/* ── events formatted for RBC ── */
-const RBC_EVENTS = CALENDAR_EVENTS.map((ev) => ({
-  id:    ev.id,
-  title: ev.title,
-  start: new Date(ev.date.getFullYear(), ev.date.getMonth(), ev.date.getDate(), ev.startHour, ev.startMin),
-  end:   new Date(ev.date.getFullYear(), ev.date.getMonth(), ev.date.getDate(), ev.startHour, ev.startMin + ev.durationMin),
-  meta:  { bg: ev.bgColor.replace(/^bg-\[|]$/g, ""), border: ev.borderColor.replace(/^border-\[|]$/g, ""), text: ev.textColor },
-  type:  ev.title.toLowerCase().includes("workshop") ? "workshop" : "virtual",
-}));
-
 type AppView = "day" | "week" | "month" | "year";
 
-function CalendarEvent({ event, title }: { event: { start?: Date }; title?: string }) {
+function CalendarEventComponent({ event, title }: { event: { start?: Date }; title?: string }) {
   const timeStr = event?.start ? format(event.start, "hh:mm a") : "";
   return (
     <div className="flex flex-col leading-tight">
@@ -35,34 +24,35 @@ function CalendarEvent({ event, title }: { event: { start?: Date }; title?: stri
   );
 }
 
-const VIEW_TABS: { key: AppView; rbc: View | null; label: string }[] = [
-  { key: "day",   rbc: "day",   label: "Daily"   },
-  { key: "week",  rbc: "week",  label: "Weekly"  },
-  { key: "month", rbc: "month", label: "Monthly" },
-  { key: "year",  rbc: null,    label: "Yearly"  },
+const VIEW_TABS: { key: AppView; label: string }[] = [
+  { key: "day", label: "Daily" },
+  { key: "week", label: "Weekly" },
+  { key: "month", label: "Monthly" },
+  { key: "year", label: "Yearly" },
 ];
 
 export const CalendarPage = () => {
-  const [view, setView]               = useState<AppView>("week");
-  const [currentDate, setCurrentDate]  = useState(new Date(2026, 2, 4));
+  const [view, setView] = useState<AppView>("week");
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
 
-  const handleTabChange = (v: AppView) => {
-    setView(v);
-  };
+  useEffect(() => {
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setEvents([]);
+  }, [currentDate, view]);
+
+  const rbcEvents = events.map(toRbcEvent);
 
   return (
     <div className="flex flex-col gap-4 h-[calc(100vh-120px)]">
-
-      {/* ── Toolbar ── */}
       <div className="flex flex-wrap items-center gap-3">
         <span className="text-base font-semibold text-gray-900 dark:text-white">Calendar</span>
-
-        {/* view tabs */}
         <div className="flex items-center gap-2">
           {VIEW_TABS.map((v) => (
             <button
               key={v.key}
-              onClick={() => handleTabChange(v.key)}
+              onClick={() => setView(v.key)}
               className={`px-4 py-1.5 rounded-full text-sm border transition ${
                 view === v.key
                   ? "border-[#44BCFF] text-[#44BCFF] bg-[#44BCFF]/5"
@@ -73,51 +63,20 @@ export const CalendarPage = () => {
             </button>
           ))}
         </div>
-
-        {/* spacer */}
         <div className="flex-1" />
-
-        {/* navigation */}
-        {/* <div className="flex items-center gap-2">
-          <button
-            onClick={() => handleNavigate(-1)}
-            className="h-8 w-8 rounded-full flex items-center justify-center border border-gray-200 dark:border-white/15 text-gray-500 dark:text-slate-400 hover:border-[#44BCFF]/60 hover:text-[#44BCFF] transition"
-          >
-            <FiChevronLeft size={15} />
-          </button>
-          <span className="text-sm font-semibold text-gray-700 dark:text-white min-w-35 text-center">
-            {headerLabel(currentDate, view)}
-          </span>
-          <button
-            onClick={() => handleNavigate(1)}
-            className="h-8 w-8 rounded-full flex items-center justify-center border border-gray-200 dark:border-white/15 text-gray-500 dark:text-slate-400 hover:border-[#44BCFF]/60 hover:text-[#44BCFF] transition"
-          >
-            <FiChevronRight size={15} />
-          </button>
-          <button
-            onClick={() => setCurrentDate(new Date())}
-            className="px-3 py-1.5 rounded-full text-xs border border-gray-200 dark:border-white/15 text-gray-500 dark:text-slate-400 hover:border-[#44BCFF]/60 hover:text-[#44BCFF] transition"
-          >
-            Today
-          </button>
-        </div> */}
       </div>
 
-      {/* ── Calendar body ── */}
       {view === "year" ? (
         <YearlyView currentDate={currentDate} onDateChange={setCurrentDate} />
       ) : view === "day" ? (
         <div className="flex-1 min-h-0 flex flex-col">
-          <DailyView currentDate={currentDate} onDateChange={setCurrentDate} />
+          <DailyView events={events} currentDate={currentDate} onDateChange={setCurrentDate} />
         </div>
       ) : (
-        <div
-          className="flex-1 overflow-hidden "
-          style={{ borderRadius: "26.53px" }}
-        >
+        <div className="flex-1 overflow-hidden" style={{ borderRadius: "26.53px" }}>
           <Calendar
             localizer={localizer}
-            events={RBC_EVENTS}
+            events={rbcEvents}
             view={view as View}
             onView={(v) => setView(v as AppView)}
             date={currentDate}
@@ -147,10 +106,9 @@ export const CalendarPage = () => {
                 date.getFullYear() === today.getFullYear();
               return isToday ? { className: "rbc-today" } : {};
             }}
-            components={{ event: CalendarEvent }}
+            components={{ event: CalendarEventComponent }}
             formats={{
-              timeGutterFormat: (date, _culture, loc) =>
-                loc!.format(date, "h aa", _culture),
+              timeGutterFormat: (date, _culture, loc) => loc!.format(date, "h aa", _culture),
               dayFormat: (date) => format(date, "EEE"),
               dayHeaderFormat: (date) => format(date, "EEE"),
               dayRangeHeaderFormat: ({ start, end }, _culture, loc) =>
