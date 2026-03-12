@@ -48,7 +48,7 @@ export const OtpForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="space-y-3">
-        <label className="font-poppins text-[13.259px] font-normal leading-none text-gray-900 dark:text-white">
+        <label className="font-poppins mb-1.5! text-[13.259px] font-normal leading-none text-gray-900 dark:text-white">
           Enter OTP
         </label>
         <OTPInput
@@ -61,8 +61,8 @@ export const OtpForm = () => {
           renderInput={(inputProps) => (
             <input
               {...inputProps}
-              style={{ width: "76px", height: "46px" }}
-              className={`rounded-full border bg-transparent text-center text-lg text-gray-900 dark:text-slate-50 outline-none transition-colors
+          
+              className={`md:rounded-full rounded-lg border bg-transparent text-center text-lg text-gray-900 dark:text-slate-50 outline-none transition-colors xl:h-11 xl:w-19 md:w-15 h-[38.5px]  w-[38.5px] 
                 ${
                   hasError
                     ? "border-red-500"
@@ -79,7 +79,7 @@ export const OtpForm = () => {
 
       <button
         type="submit"
-        className="mt-6 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
+        className="sm:mt-6 inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
       >
         Verify
       </button>

@@ -140,7 +140,7 @@ export const SignupForm = () => {
       </div>
 
       <div className={mutedTextClass}>
-        <label className="flex items-start gap-2 mb-6">
+        <label className="flex items-start gap-2 lg:mb-6 mb-3">
           <input
             type="checkbox"
             className="mt-0.5 h-3.5 w-3.5 rounded border border-[#44BCFF] bg-transparent text-[#44BCFF]"
@@ -168,7 +168,7 @@ export const SignupForm = () => {
         </label>
       </div>
 
-      <div className="mt-6 flex items-center gap-5">
+      <div className="mt-6 flex sm:flex-row flex-col sm:items-center gap-5">
         <button
           type="submit"
           className="inline-flex w-32 items-center justify-center rounded-full bg-[#44BCFF] px-5 py-2.5 text-sm text-white"
